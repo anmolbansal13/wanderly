@@ -1,10 +1,23 @@
 import React from 'react'
+import './Card.css'
 
-export default function Card() {
+export default function Card({ destination }) {
   return (
-    <div className='card-container'>
-        <img className="card-image"src="https://miro.medium.com/v2/resize:fit:603/1*fYA-b-KA9UUqPL2OsDYkQw.png" alt="no-img" srcset=""/>
-        <h3 className="location-name">Jaipur</h3>
+    <div className="destination-card">
+      <div className="card-image">
+        <img src={destination.image} alt={destination.name} />
+        <span className="distance">{destination.distance}</span>
+      </div>
+      <div className="card-content">
+        <div className="flex justify-between items-center">
+          <h3 className="card-title">{destination.name}</h3>
+          <div className="rating">
+            <i className="fas fa-star text-yellow-400"></i>
+            <span>{destination.rating}</span>
+          </div>
+        </div>
+        <p className="card-description">{destination.description}</p>
+      </div>
     </div>
   )
 }
