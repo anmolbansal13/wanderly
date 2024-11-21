@@ -9,8 +9,9 @@ html,body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 body{
-    background-color: #FFEAC5;
-    display: flex;
+    /* background-color: #FFEAC5; */
+    background-color: white;
+    /* display: flex; */
 }
 .navbar{
     background-color: #603F26;
@@ -19,8 +20,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
-    position: fixed;
+    width: 100%;
+    /* position: fixed; */
 }
 .hamicon{
     margin: 1rem;
@@ -41,6 +42,11 @@ body{
     margin: 1rem;
     margin-left: auto;
 }
+.loginSignupBtn:hover{
+    cursor: pointer;
+    border: solid 2px white;
+    transform: scale(1.15);
+}
 
 
 .main-body{
@@ -49,31 +55,76 @@ body{
     /* height: 90%; */
     height: auto;
     position: relative;
-    top: 3.05em;
+    /* top: 3.05em; */
     margin: 3px;
 }
+
+
 .search-container{
-    height: 100%;
+    /* height: 100%; */
+    width: 65%;
     flex: 1;
     margin: 5px;
-    background-color: #b07e4f;
+    background-color: #FFEAC5;
+    border: 2px solid black;
+    border-radius: 1em;
 }
 .search-form{
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+    /* justify-content: space-around; */
+    /* justify-content: center; */
+    justify-content: left;
+    /* height: 100%;
+    width: 100%; */
+    padding: 0.5em;
+    flex-wrap: wrap;
+}
+.currentCity, .filters, .searchBtn, #searchbar{
+    /* padding: 8px 20px;
+    margin: 5px 10px; */
+    padding: 0.3em 0.6em;
+    margin: 0.2em 0.7em;
+    border: 1px solid black;
+    border-radius: 3rem;
+    background-color: white;
+    /* background-color: #FFDBB5; */
+    flex: 0.5;
+    text-align: center;
+    font-size: small;
+    font-weight: 600;
+}
+#searchbar{
+    flex: 1.5;
+    color: black;
+}
+.currentCity:hover, .filters:hover, .searchBtn:hover, #searchbar:hover{
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 
-
-
-
-
-
-
+/* .carousel{
+    position: relative;
+    height: auto;
+    margin: 1.9em;
+}
+.searchedCityName{
+    backdrop-filter: blur(5px);
+    position: absolute;
+    padding: 3px;
+    font-weight: bold;
+}
+.searchedCityDescription{
+    backdrop-filter: blur(6px);
+    position: absolute;
+    bottom: 0px;
+    font-size: x-small;
+    margin: 0.5em;
+}
+.searchedCityImg{
+    width: 800px;
+} */
 
 
 
@@ -85,7 +136,7 @@ body{
 .featured-container{    
     height: 100%;
     margin: 5px;
-    background-color: #b07e4f;
+    background-color: #FFEAC5;
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -95,30 +146,42 @@ body{
     font-size: large;
     font-weight: 600;
 }
+.cards-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .card-container{
     background-color: #FFDBB5;
     margin: 0.4em;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
-    border-radius: 15rem;
+    /* width: 100%; */
+    border-radius: 5rem;
     overflow: hidden;
     border: 1px solid white;
+    position: relative;
+}
+.card-container img{
+    width: 8rem; 
+    /* border-radius: 1rem; */
 }
 .card-container:hover{
     background-color: #FFEAC5;
     cursor: pointer;
     transform: scale(1.05);
 }
-.card-container img{
-    height: 50px;
-    /* border-radius: 1rem; */
-}
 .card-container h3{
-    flex: 1;
-    color: black;
+    /* flex: 1; */
+    color: white;
     text-align: center;
+    position: absolute; 
+    bottom: 0;
+    margin: 0.3em;
+    font-weight: bold;
+    backdrop-filter: blur(2px);
+
 }
 .featured-container i:hover{
     cursor: pointer;
