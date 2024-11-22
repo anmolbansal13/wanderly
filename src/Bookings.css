@@ -1,0 +1,53 @@
+/* General Container Styling */
+.bookings-container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: white;
+  }
+  
+  /* Title Styling */
+  .bookings-title {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bolder;
+  }
+  
+  /* Booking Options Grid */
+  .booking-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+  }
+  
+  /* Individual Booking Card */
+  .booking-card {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    width: 10em;
+  }
+  
+  .booking-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* background: #FFEAC5; */
+  }
+  
+  /* Icon Styling */
+  .booking-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Booking Name Styling */
+  .booking-name {
+    font-size: 0.8rem;
+    color: #555;
+  }
+  
