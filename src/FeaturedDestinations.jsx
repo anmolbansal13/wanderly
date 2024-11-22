@@ -73,6 +73,7 @@ export default function FeaturedDestinations() {
 
   return (
     <div className="featured-container">
+<<<<<<< HEAD
       <div className="featured-header">
         <h2>Featured Destinations</h2>
         <div className="carousel-controls-vertical">
@@ -82,6 +83,20 @@ export default function FeaturedDestinations() {
           <button onClick={prevSlide} className="carousel-btn-vertical carousel-btn-prev-vertical" disabled={isAtStart}>
             <i className="fas fa-chevron-up"></i>
           </button>
+=======
+      <h2 >Featured Destinations</h2>
+      <div className="cards-list">
+          <Card key={destinations.find((_, index)=> index===currentIndex).id} destination={destinations.find((_, index)=> index===currentIndex)} />
+          <Card key={destinations.find((_, index)=> index===currentIndex+1).id} destination={destinations.find((_, index)=> index===currentIndex+1)} />
+      </div>
+      <div className="carousel-controls-vertical">
+          <button onClick={prevSlide} className="carousel-btn-vertical carousel-btn-prev-vertical" disabled={isAtStart}>
+            <i className="fas fa-chevron-up"></i>
+          </button>
+          <button onClick={nextSlide} className="carousel-btn-vertical carousel-btn-next-vertical" disabled={isAtEnd}>
+            <i className="fas fa-chevron-down"></i>
+          </button>
+>>>>>>> f58dba01dee1be9d443a64eb0505c60908a04112
         </div>
       </div>
       <div className="cards-list" style={{ transform: `translateY(-${currentIndex * 150}px)` }}>

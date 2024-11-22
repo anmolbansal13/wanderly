@@ -18,10 +18,10 @@
   
   .carousel-img {
     width: 100%;
-    max-height: 400px; /* Adjust for consistent height */
+    height: 300px; /* Adjust for consistent height */
     object-fit: cover; /* Ensures the image is properly cropped */
     opacity: 0;
-    transition: 3s ease-in-out;
+    transition: 2s ease-in-out;
   }
   
   .carousel-img.active {
