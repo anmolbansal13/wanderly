@@ -30,7 +30,7 @@
   
   .card-content h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
   }
   
   .location {
@@ -123,7 +123,7 @@
   
   /* Keep the existing card styles and add these new ones */
   
-  .featured-container {
+  /* .featured-container {
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -131,13 +131,13 @@
     align-items: center;
     padding: 2rem;
     background-color: #f8f9fa;
-  }
+  } */
   
-  .featured-container h2 {
+  /* .featured-container h2 {
     margin-bottom: 2rem;
     color: #333;
     font-size: 2rem;
-  }
+  } */
   
   .carousel-container {
     width: 100%;
@@ -164,7 +164,7 @@
   }
   
   .card-description {
-    font-size: 0.9rem;
+    font-size: 0.65rem;
     color: #666;
   }
   

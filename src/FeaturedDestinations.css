@@ -1,22 +1,25 @@
 .featured-container {
-    width: 25%;
-    padding: 1rem;
-    background-color: white;
+  padding: 1rem;
+  background-color: white;
     border-radius: 1rem;
     margin: 5px;
     /* position: relative; */
-    height: 100%;
     display: flex;
-    /* flex-direction: column; */
-    /* height: 50%; */
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    /* overflow: hidden; */
+    /* max-height: 30%; */
+    height: 100%;
+    width: auto;
   }
   
-  .featured-container h2 {
+  .featured-container>h2 {
     color: #603f26;
     font-weight: bold;
     background: white;
     font-size: medium;
-    /* padding: 1rem; */
+    padding: 0.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
   }
@@ -45,7 +48,7 @@
   
   .card-image {
     position: relative;
-    height: 150px;
+    height: 100px;
   }
   
   .card-image img {
@@ -58,7 +61,7 @@
     display: flex;
     /* flex-direction: row; */
     gap: 1rem;
-    z-index: 1000;
+    z-index: 100;
   }
   
   .carousel-btn-vertical {

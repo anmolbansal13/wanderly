@@ -18,10 +18,16 @@
     width: 400px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
+    color: #603F26;
   }
-  
+  /* .popup-container>h2{
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 8px;
+  } */
   form div {
     margin-bottom: 15px;
+    text-align: left;
   }
   
   form input {
@@ -30,7 +36,10 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
+  form button{
+    background-color: #603F26;
+    color: #ccc;
+  }
   button {
     margin-top: 10px;
     padding: 10px 20px;

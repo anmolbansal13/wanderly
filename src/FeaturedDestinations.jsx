@@ -77,6 +77,7 @@ export default function FeaturedDestinations() {
       <div className="cards-list">
           <Card key={destinations.find((_, index)=> index===currentIndex).id} destination={destinations.find((_, index)=> index===currentIndex)} />
           <Card key={destinations.find((_, index)=> index===currentIndex+1).id} destination={destinations.find((_, index)=> index===currentIndex+1)} />
+          {/* <Card key={destinations.find((_, index)=> index===currentIndex+2).id} destination={destinations.find((_, index)=> index===currentIndex+2)} /> */}
       </div>
       <div className="carousel-controls-vertical">
           <button onClick={prevSlide} className="carousel-btn-vertical carousel-btn-prev-vertical" disabled={isAtStart}>
