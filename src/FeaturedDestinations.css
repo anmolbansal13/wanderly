@@ -1,110 +1,26 @@
 .featured-container {
-<<<<<<< HEAD
-  width: 30%;
-  padding: 1rem;
-  background-color: white;
-  border-radius: 1rem;
-  margin: 5px;
-  position: relative;
-  height: 100%;
-}
-
-.featured-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  background: white;
-  padding: 1rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-.featured-header h2 {
-  color: #603f26;
-  font-weight: bold;
-}
-
-/* Cards and Carousel */
-.cards-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: transform 0.5s ease-in-out;
-  margin-top: 7rem;
-}
-
-.destination-card {
-  background: white;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.destination-card:hover {
-  transform: translateX(5px);
-}
-
-.card-image {
-  position: relative;
-  height: 150px;
-}
-
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.carousel-controls-vertical {
-  position: absolute;
-  top: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  z-index: 1000;
-}
-
-.carousel-btn-vertical {
-  background: #603f26;
-  color: #ffeac5;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0rem;
-}
-
-.carousel-btn-vertical:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-=======
     width: 25%;
     padding: 1rem;
     background-color: white;
     border-radius: 1rem;
     margin: 5px;
     /* position: relative; */
-    height: 100%;
     display: flex;
-    /* flex-direction: column; */
-    /* height: 50%; */
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    /* overflow: hidden; */
+    /* max-height: 30%; */
+    height: 100%;
+    width: auto;
   }
   
-  .featured-container h2 {
+  .featured-container>h2 {
     color: #603f26;
     font-weight: bold;
     background: white;
     font-size: medium;
-    /* padding: 1rem; */
+    padding: 0.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
   }
@@ -133,7 +49,7 @@
   
   .card-image {
     position: relative;
-    height: 150px;
+    height: 100px;
   }
   
   .card-image img {
@@ -146,7 +62,7 @@
     display: flex;
     /* flex-direction: row; */
     gap: 1rem;
-    z-index: 1000;
+    z-index: 100;
   }
   
   .carousel-btn-vertical {
@@ -166,4 +82,3 @@
     cursor: not-allowed;
     opacity: 0.5;
   }
->>>>>>> f58dba01dee1be9d443a64eb0505c60908a04112
