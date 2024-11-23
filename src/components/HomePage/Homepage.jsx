@@ -1,11 +1,9 @@
 import React from 'react'
-import Navbar from './Navbar'
-import MainBody from './MainBody'
+import MainBody from './subcomponents/MainBody';
 
 export default function Homepage() {
   return (
     <>
-        <Navbar/>
         <MainBody/>
     </>
   )
