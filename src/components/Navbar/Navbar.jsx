@@ -3,7 +3,6 @@ import Popup from "../HomePage/subcomponents/Popup";
 
 export default function Navbar() {
 
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = () => setIsLoggedIn(true);
   
