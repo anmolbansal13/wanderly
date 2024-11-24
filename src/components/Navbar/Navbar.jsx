@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Popup from "../HomePage/subcomponents/Popup";
 
 export default function Navbar() {
+
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const handleLogin = () => setIsLoggedIn(true);
-
   
   const [isPopupOpen, setPopupOpen] = useState(false);
   return (
