@@ -1,0 +1,9 @@
+.main-body{
+    display: flex;
+    max-height: auto;
+    /* height: 90%; */
+    height: auto;
+    position: relative;
+    /* top: 3.05em; */
+    margin: 3px;
+}

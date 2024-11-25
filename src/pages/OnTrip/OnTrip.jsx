@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import "./OnTrip.css"; 
 
 const OnTrip = () => {
+  const navigate = useNavigate();
+  navigate('/offtrip');
+
+  // const handleStartTrip = () => {
+  // };
   const mockActivities = ["Activity 1", "Activity 2", "Activity 3"];
   const tripProgress = 2; 
   const totalActivities = 5;

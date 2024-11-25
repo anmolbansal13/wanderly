@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import Popup from "../HomePage/subcomponents/Popup";
+import LoginPopup from "../LoginPopup/LoginPopup";
+import './Navbar.css';
 
-export default function Navbar() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogin = () => setIsLoggedIn(true);
-  
+export default function Navbar({ isLoggedIn }) {
   const [isPopupOpen, setPopupOpen] = useState(false);
   return (
     <div className="navbar">
       <i class="fa-solid fa-bars hamicon"></i>
       <h1 className="websiteName">Wanderly</h1>
+      
       {isLoggedIn ? (
         <i class="fa-solid fa-user usericon"></i>
       ) : (
@@ -18,7 +16,7 @@ export default function Navbar() {
           LOG IN / SIGN UP
         </button>
       )}
-      <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+      <LoginPopup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
     </div>
   );
 }

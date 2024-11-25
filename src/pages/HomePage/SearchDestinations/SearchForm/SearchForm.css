@@ -1,0 +1,54 @@
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1em;
+    gap: 10px; /* Add space between elements */
+    flex-wrap: wrap;
+}
+
+.currentCity, .filters, .searchBtn, #searchbar {
+    padding: 0.5em 1em;
+    margin: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3rem;
+    background-color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    text-align: center;
+    color: #616161;
+}
+
+#searchbar {
+    flex: 2;
+    color: black;
+    font-size: 0.7rem; /* Make search text bigger */
+}
+
+.currentCity:hover, .filters:hover, .searchBtn:hover {
+    cursor: pointer;
+    transform: scale(1.05); /* Slightly more noticeable hover effect */
+    background-color: #FFEAC5; /* Add color on hover for better visual feedback */
+}
+#searchbar:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+    .search-container {
+        width: 90%;
+    }
+    
+    .search-form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .currentCity, .filters, .searchBtn, #searchbar {
+        width: 100%;
+        text-align: left;
+    }
+}

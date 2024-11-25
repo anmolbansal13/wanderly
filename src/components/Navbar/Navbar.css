@@ -1,0 +1,38 @@
+
+.navbar{
+    background-color: #603F26;
+    height: 3rem;
+    color: #FFEAC5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* position: fixed; */
+}
+.hamicon{
+    margin: 1rem;
+}
+.websiteName{
+    margin-right: auto;
+
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+.usericon{
+    margin: 1rem;
+}
+.loginSignupBtn{
+    background-color: #FFEAC5;
+    color: #603F26;
+    font-weight: 700;
+    font-size: medium;
+    padding: 0.3rem;
+    border: solid 1px white;
+    border-radius: 2rem;
+    margin: 1rem;
+    margin-left: auto;
+}
+.loginSignupBtn:hover{
+    cursor: pointer;
+    border: solid 2px white;
+    transform: scale(1.15);
+}

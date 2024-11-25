@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Popup.css"; // Add your custom styles here
+import "./LoginPopup.css"; // Add your custom styles here
 
-const Popup = ({ isOpen, onClose }) => {
+const LoginPopup = ({ isOpen, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -113,4 +113,4 @@ const Popup = ({ isOpen, onClose }) => {
   );
 };
 
-export default Popup;
+export default LoginPopup;
