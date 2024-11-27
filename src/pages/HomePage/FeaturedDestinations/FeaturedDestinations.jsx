@@ -61,13 +61,13 @@ export default function FeaturedDestinations() {
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex + 2 >= destinations.length ? 0 : prevIndex + 2
+      prevIndex + 3 >= destinations.length ? 0 : prevIndex + 3
     )
   }
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex - 2 < 0 ? destinations.length - 2 : prevIndex - 2
+      prevIndex - 3 < 0 ? destinations.length - 1 : prevIndex - 3
     )
   }
 
@@ -77,7 +77,7 @@ export default function FeaturedDestinations() {
       <div className="cards-list">
           <Card key={destinations.find((_, index)=> index===currentIndex).id} destination={destinations.find((_, index)=> index===currentIndex)} />
           <Card key={destinations.find((_, index)=> index===currentIndex+1).id} destination={destinations.find((_, index)=> index===currentIndex+1)} />
-          {/* <Card key={destinations.find((_, index)=> index===currentIndex+2).id} destination={destinations.find((_, index)=> index===currentIndex+2)} /> */}
+          <Card key={destinations.find((_, index)=> index===currentIndex+2).id} destination={destinations.find((_, index)=> index===currentIndex+2)} />
       </div>
       <div className="carousel-controls-vertical">
           <button onClick={prevSlide} className="carousel-btn-vertical carousel-btn-prev-vertical" disabled={isAtStart}>

@@ -1,38 +1,132 @@
+.navbar {
+  background-color: #603f26;
+  height: 3rem;
+  color: #ffeac5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* position: fixed; */
+}
+.hamicon {
+  margin: 1rem;
+}
+.websiteName {
+  margin-right: auto;
 
-.navbar{
-    background-color: #603F26;
-    height: 3rem;
-    color: #FFEAC5;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    /* position: fixed; */
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
-.hamicon{
-    margin: 1rem;
+.usericon {
+  margin: 1rem;
 }
-.websiteName{
-    margin-right: auto;
+.loginSignupBtn {
+  background-color: #ffeac5;
+  color: #603f26;
+  font-weight: 700;
+  font-size: medium;
+  padding: 0.3rem;
+  border: solid 1px white;
+  border-radius: 2rem;
+  margin: 1rem;
+  margin-left: auto;
+}
+.loginSignupBtn:hover {
+  cursor: pointer;
+  border: solid 2px white;
+  transform: scale(1.15);
+}
 
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+.profile-container {
+  position: relative;
 }
-.usericon{
-    margin: 1rem;
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 120px;
+  z-index: 1000;
+
+  /* Animation properties */
+  transform-origin: top;
+  animation: dropdownAnimation 0.3s ease forwards;
 }
-.loginSignupBtn{
-    background-color: #FFEAC5;
-    color: #603F26;
-    font-weight: 700;
-    font-size: medium;
-    padding: 0.3rem;
-    border: solid 1px white;
-    border-radius: 2rem;
-    margin: 1rem;
-    margin-left: auto;
+
+@keyframes dropdownAnimation {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
-.loginSignupBtn:hover{
-    cursor: pointer;
-    border: solid 2px white;
-    transform: scale(1.15);
+
+/* Optional: Add animation for menu items */
+.dropdown-item {
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: calc(var(--item-index) * 0.1s);
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu {
+  color: black;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 120px;
+  z-index: 1000;
+
+  /* Animation properties */
+  transform-origin: top;
+  animation: dropdownAnimation 0.3s ease forwards;
+}
+
+@keyframes dropdownAnimation {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Optional: Add animation for menu items */
+.dropdown-item {
+  animation: fadeIn 0.3s ease forwards;
+  animation-delay: calc(var(--item-index) * 0.1s);
+  opacity: 0;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
