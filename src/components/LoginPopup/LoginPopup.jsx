@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./LoginPopup.css"; // Add your custom styles here
+import "./LoginPopup.css";
 
 let url = "http://localhost:3000";
 

@@ -13,7 +13,7 @@ function App() {
   const [loginRedirect, setLoginRedirect] = useState(null);
 
   return (
-    <>
+    <div className="App">
       <Navbar
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
@@ -45,7 +45,7 @@ function App() {
         <Route path="/offtrip" element={<OffTrip />} />
         <Route path="/ontrip" element={<OnTrip />} />
       </Routes>
-    </>
+    </ div>
   );
 }
 

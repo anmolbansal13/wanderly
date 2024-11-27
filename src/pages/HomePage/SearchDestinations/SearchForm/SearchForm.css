@@ -6,10 +6,12 @@
     gap: 10px; /* Add space between elements */
     flex-wrap: wrap;
 }
-
+.search-form h4{
+    font-size: 0.8rem;
+}
 .currentCity, .filters, .searchBtn, #searchbar {
     padding: 0.5em 1em;
-    margin: 5px 10px;
+    margin-top: auto;
     border: 1px solid #ddd;
     border-radius: 3rem;
     background-color: white;
@@ -36,19 +38,33 @@
     transform: scale(1.05);
 }
 
+h4{
+    grid-area: a;
+}
+.currentCity{
+    grid-area: b;
+}
+.filters{
+    grid-area: c;
+}
+#searchbar{
+    grid-area: d;
+}
+.searchBtn{
+    grid-area: e;
+}
 
 @media (max-width: 768px) {
     .search-container {
-        width: 90%;
+        width: 100%;
     }
     
     .search-form {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .currentCity, .filters, .searchBtn, #searchbar {
-        width: 100%;
-        text-align: left;
+        display: grid;
+        grid-template-areas:
+            "a b b c c"
+            "d d d e e";
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
 }

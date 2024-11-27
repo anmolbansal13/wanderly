@@ -1,5 +1,5 @@
 import React from "react";
-import SearchDestinations from "./SearchDestinations/SearchDestinations";
+import SearchDestinations from "./SearchDestinations/SearchDestinations.jsx";
 import FeaturedDestinations from "./FeaturedDestinations/FeaturedDestinations";
 import "./Homepage.css";
 

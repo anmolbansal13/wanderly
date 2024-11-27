@@ -1,8 +1,7 @@
 /* General Container Styling */
 .bookings-container {
     /* max-width: 1200px; */
-    margin: 0 auto;
-    padding: 20px;
+    padding: 0 0 0 8px;
     text-align: center;
     font-family: Arial, sans-serif;
     background-color: white;
@@ -18,8 +17,9 @@
   
   /* Booking Options Grid */
   .booking-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     gap: 12px;
     margin-top: 10px;
   }
@@ -31,7 +31,7 @@
     padding: 10px;
     transition: box-shadow 0.3s ease;
     text-align: center;
-    width: 10em;
+    width: 100%;
   }
   
   .booking-card:hover {
@@ -50,4 +50,11 @@
     font-size: 0.8rem;
     color: #555;
   }
-  
+  @media (max-width: 900px) {
+    .booking-options {
+      flex-direction: row; /*?*/
+    }
+    .booking-card{
+      max-width: 30%;
+    }
+  }
