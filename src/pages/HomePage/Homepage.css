@@ -4,6 +4,7 @@
     height: 100%;
     width: 100%;
     padding: 3px;
+    overflow: hidden;
 }
 @media screen and (max-width: 768px) {
     .main-body{

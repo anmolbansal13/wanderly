@@ -4,9 +4,9 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-html{
+html, body{
     height: auto;
-    width: 100vw;
+    width: 100%;
 }
 #root{
     height: 100%;
