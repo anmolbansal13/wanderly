@@ -42,31 +42,29 @@ export default function SearchForm() {
       <button type="button" className="filters">
         Filters
       </button>
-      <div className="search-container">
-        <input
-          type="text"
-          name="searchbar"
-          id="searchbar"
-          placeholder="Search for Destination..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
-        {predictions.length > 0 && (
-          <ul className="predictions-list">
-            {predictions.map((prediction) => (
-              <li
-                key={prediction.place_id}
-                onClick={() => handleSelect(prediction)}
-              >
-                {prediction.description}
-              </li>
-            ))}
-          </ul>
-        )}
-        <button type="submit" className="searchBtn">
-          Search
-        </button>
-      </div>
+      <input
+        type="text"
+        name="searchbar"
+        id="searchbar"
+        placeholder="Search for Destination..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
+      {predictions.length > 0 && (
+        <ul className="predictions-list">
+          {predictions.map((prediction) => (
+            <li
+              key={prediction.place_id}
+              onClick={() => handleSelect(prediction)}
+            >
+              {prediction.description}
+            </li>
+          ))}
+        </ul>
+      )}
+      <button type="submit" className="searchBtn">
+        Search
+      </button>
     </form>
   );
 }

@@ -6,7 +6,7 @@ export default function Card({ destination }) {
     <div className="destination-card">
       <div className="card-image">
         <img src={destination.image} alt={destination.name} />
-        <span className="distance">{destination.distance}</span>
+        {/* <span className="distance">{destination.distance}</span> */}
       </div>
       <div className="card-content">
         <div className="flex justify-between items-center">

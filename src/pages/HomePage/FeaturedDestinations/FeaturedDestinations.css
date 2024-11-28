@@ -1,16 +1,16 @@
 .featured-container {
-  /* width: 25%; */
+  min-width: 25%;
   padding: 1rem;
   background-color: white;
   border-radius: 1rem;
-  margin: 5px;
+  margin: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid #ddd;
   height: 100%;
   overflow: hidden;
-  /* width: auto; */
+  width: auto;
 }
 
 .featured-container > h2 {
