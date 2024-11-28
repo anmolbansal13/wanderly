@@ -1,70 +1,75 @@
 .search-form {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1em;
-    gap: 10px; /* Add space between elements */
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1em;
+  gap: 10px; /* Add space between elements */
+  flex-wrap: wrap;
 }
-.search-form h4{
-    font-size: 0.8rem;
+.search-form h4 {
+  font-size: 0.8rem;
 }
-.currentCity, .filters, .searchBtn, #searchbar {
-    padding: 0.5em 1em;
-    margin-top: auto;
-    border: 1px solid #ddd;
-    border-radius: 3rem;
-    background-color: white;
-    font-size: 0.7rem;
-    font-weight: 600;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    text-align: center;
-    color: #616161;
+.currentCity,
+.filters,
+.searchBtn,
+#searchbar {
+  padding: 0.5em 1em;
+  margin-top: auto;
+  border: 1px solid #ddd;
+  border-radius: 3rem;
+  background-color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-align: center;
+  color: #616161;
 }
 
 #searchbar {
-    flex: 2;
-    color: black;
-    font-size: 0.7rem; /* Make search text bigger */
+  flex: 2;
+  color: black;
+  font-size: 0.7rem; /* Make search text bigger */
 }
 
-.currentCity:hover, .filters:hover, .searchBtn:hover {
-    cursor: pointer;
-    transform: scale(1.05); /* Slightly more noticeable hover effect */
-    background-color: #FFEAC5; /* Add color on hover for better visual feedback */
+.currentCity:hover,
+.filters:hover,
+.searchBtn:hover {
+  cursor: pointer;
+  transform: scale(1.05); /* Slightly more noticeable hover effect */
+  background-color: #ffeac5; /* Add color on hover for better visual feedback */
 }
-#searchbar:hover{
-    cursor: pointer;
-    transform: scale(1.05);
+#searchbar:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
-h4{
-    grid-area: a;
+h4 {
+  grid-area: a;
 }
-.currentCity{
-    grid-area: b;
+.currentCity {
+  grid-area: b;
 }
-.filters{
-    grid-area: c;
+.filters {
+  grid-area: c;
 }
-#searchbar{
-    grid-area: d;
+#searchbar {
+  grid-area: d;
 }
-.searchBtn{
-    grid-area: e;
+.searchBtn {
+  grid-area: e;
 }
 
 @media (max-width: 768px) {
-    .search-container {
-        width: 100%;
-    }
-    
-    .search-form {
-        display: grid;
-        grid-template-areas:
-            "a b b c c"
-            "d d d e e";
-        grid-template-rows: 1fr 1fr;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    }
+  .search-container {
+    width: 100%;
+  }
+
+  .search-form {
+    display: grid;
+    grid-template-areas:
+      "a b b c c"
+      "d d d e e";
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 }
