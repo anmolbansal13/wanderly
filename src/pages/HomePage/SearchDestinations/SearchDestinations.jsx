@@ -4,7 +4,7 @@ import Bookings from "./Bookings/Bookings.jsx";
 import SearchForm from "./SearchForm/SearchForm.jsx";
 import "./SearchDestinations.css";
 export default function SearchDestinations({ isLoggedIn, setLoginPopup }) {
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCity, setSelectedCity] = useState("ChIJP9A_FgiHBDkRzXZQvg6oKYE");
   return (
     <div className="searchDestinations">
       <SearchForm onCitySelect={setSelectedCity} />

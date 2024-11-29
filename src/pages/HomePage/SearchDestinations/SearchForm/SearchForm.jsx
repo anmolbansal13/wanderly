@@ -4,11 +4,12 @@ import "./SearchForm.css";
 const url = "http://localhost:3000";
 export default function SearchForm({ onCitySelect }) {
   const [searchInput, setSearchInput] = useState("");
+  const [searchOutput, setSearchOutput] = useState("");
   const [predictions, setPredictions] = useState([]);
 
   useEffect(() => {
     const fetchPredictions = async () => {
-      if (searchInput) {
+      if (searchInput && searchInput !== searchOutput) {
         try {
           const response = await fetch(
             `${url}/autocompleteSearch?input=${encodeURIComponent(searchInput)}`
@@ -27,32 +28,27 @@ export default function SearchForm({ onCitySelect }) {
       }
     };
 
-    // Add debounce to avoid too many API calls
     const timeoutId = setTimeout(() => {
       fetchPredictions();
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [searchInput]);
+  }, [searchInput, searchOutput]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setSearchOutput(searchInput);
+  //   onCitySelect(searchInput);
+  // };
 
-  const handleSelect = (prediction) => {
+  const handlePredictionSelection = (prediction) => {
+    setSearchOutput(prediction.description);
     setSearchInput(prediction.description);
-    setPredictions([]);
-    onCitySelect(prediction.place_id);
-  };
-
-  const handleClick = (prediction) => {
-    setSearchInput(prediction.description);
-    setPredictions([]);
     onCitySelect(prediction.place_id);
   };
 
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
+    <form className="search-form" onSubmit={(e) => e.preventDefault()}>
       <h4>From</h4>
       <label className="currentCity">Chandigarh</label>
       <button type="button" className="filters">
@@ -71,7 +67,7 @@ export default function SearchForm({ onCitySelect }) {
           {predictions.map((prediction) => (
             <li
               key={prediction.place_id}
-              onClick={() => handleSelect(prediction)}
+              onClick={() => handlePredictionSelection(prediction)}
             >
               {prediction.description}
             </li>
@@ -81,7 +77,7 @@ export default function SearchForm({ onCitySelect }) {
       <button
         type="submit"
         className="searchBtn"
-        onClick={() => handleClick(predictions[0])}
+        onClick={() => predictions.length > 0 && handlePredictionSelection(predictions[0])}
       >
         Search
       </button>

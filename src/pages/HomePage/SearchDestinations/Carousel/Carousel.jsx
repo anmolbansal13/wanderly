@@ -6,47 +6,42 @@ const url = "http://localhost:3000";
 export default function Carousel({ selectedCity }) {
   const [images, setImages] = useState([
     {
-      id: 1,
-      url: "https://www.indiadrivertours.com/wp-content/uploads/2017/06/tpkg-manalitour.jpg",
-      description: "A scenic view of the mountains.",
-    },
-    {
-      id: 2,
-      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Manali_City.jpg/1024px-Manali_City.jpg",
-      description: "A serene lake surrounded by forests.",
-    },
-    {
-      id: 3,
-      url: "https://storage.googleapis.com/stateless-www-justwravel-com/2024/09/dd5f41a7-places-to-visit-in-manali--1024x668.png",
-      description: "A snow-covered mountain under a blue sky.",
+      id: 0,
+      url: "/photos/AdDdOWqqcaKpAm3HOh4ZJk-n5I8J9aMtCdBEQ4qzVDlq6Sq6LtoZtAqi3FcPizVSxsz2GgzZdM5zZFhXtIVLeBqREuFlsXZtjjEYObDP429ec8Pd5x9KgCjtvL4Y6TagGTjyUJlMXlsCIPn9i4j25PibvrIAWNZblpGFqm4racK2YVUkWWWC",
+      description: "View of the location",
     },
   ]);
+  
   const [cityInfo, setCityInfo] = useState({
     name: "MANALI",
     description: "Default description",
+    address: ""
   });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (selectedCity) {
-      // Fetch place details using Google Places API
       const fetchPlaceDetails = async () => {
         try {
           const response = await fetch(
-            `${url}/getPlaceDetails?placeid=${selectedCity.place_id}`
+            `${url}/getPlaceDetails?placeid=${selectedCity}`
           );
           const data = await response.json();
 
-          // Update city info
           setCityInfo({
             name: data.name,
             description: data.description,
+            address: data.address
           });
 
-          // Fetch place photos
-          // const photosResponse = await fetch(
-          //   `${url}/getPlaceDetails?placeid=${selectedCity.place_id}`
-          // );
-          setImages(data.photos);
+          if (data.photos && data.photos.length > 0) {
+            const photoUrls = data.photos.map(photo => ({
+              id: photo.id,
+              url: photo.url,
+              description: photo.description
+            }));
+            setImages(photoUrls);
+          }
         } catch (error) {
           console.error("Error fetching place details:", error);
         }
@@ -55,15 +50,6 @@ export default function Carousel({ selectedCity }) {
       fetchPlaceDetails();
     }
   }, [selectedCity]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Slide every 3 seconds
-
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [images]);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -77,16 +63,11 @@ export default function Carousel({ selectedCity }) {
     );
   };
 
-  const currentImage = images.find((_, id) => id === currentIndex);
-
-  if (!currentImage) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="carousel">
       <h2 className="searchedCityName">{cityInfo.name}</h2>
       <p className="searchedCityDescription">{cityInfo.description}</p>
+      <p className="searchedCityAddress">{cityInfo.address}</p>
 
       <div className="carousel-wrapper">
         <button className="carousel-btn prev" onClick={prevSlide}>
@@ -94,8 +75,8 @@ export default function Carousel({ selectedCity }) {
         </button>
         <div className="carousel-images">
           <img
-            src={currentImage.url}
-            alt={currentImage.description}
+            src={url+images[currentIndex].url}
+            alt={images[currentIndex].description}
             className="carousel-img active"
           />
         </div>
