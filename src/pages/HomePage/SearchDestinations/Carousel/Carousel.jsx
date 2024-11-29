@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./Carousel.css"; // Add custom styles
+import "./Carousel.css";
 
-export default function CarouselTest() {
+const url = "http://localhost:3000";
+
+export default function Carousel({ selectedCity }) {
   const [images, setImages] = useState([
     {
       id: 1,
@@ -19,11 +21,46 @@ export default function CarouselTest() {
       description: "A snow-covered mountain under a blue sky.",
     },
   ]);
+  const [cityInfo, setCityInfo] = useState({
+    name: "MANALI",
+    description: "Default description",
+  });
+
+  useEffect(() => {
+    if (selectedCity) {
+      // Fetch place details using Google Places API
+      const fetchPlaceDetails = async () => {
+        try {
+          const response = await fetch(
+            `${url}/getPlaceDetails?placeid=${selectedCity.place_id}`
+          );
+          const data = await response.json();
+
+          // Update city info
+          setCityInfo({
+            name: data.name,
+            description: data.description,
+          });
+
+          // Fetch place photos
+          // const photosResponse = await fetch(
+          //   `${url}/getPlaceDetails?placeid=${selectedCity.place_id}`
+          // );
+          setImages(data.photos);
+        } catch (error) {
+          console.error("Error fetching place details:", error);
+        }
+      };
+
+      fetchPlaceDetails();
+    }
+  }, [selectedCity]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000); // Slide every 3 seconds
-  
+
     return () => clearInterval(interval); // Cleanup on unmount
   }, [images]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,20 +77,16 @@ export default function CarouselTest() {
     );
   };
 
-  const currentImage = images.find((_, index) => index === currentIndex);
-  
+  const currentImage = images.find((_, id) => id === currentIndex);
+
   if (!currentImage) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="carousel">
-      <h2 className="searchedCityName">MANALI</h2>
-      <p className="searchedCityDescription">
-        Manali is known for its snow-capped mountains, cool climate, and natural
-        beauty. It's also a gateway to the Lahaul and Spiti district and the
-        city of Leh in Ladakh.
-      </p>
+      <h2 className="searchedCityName">{cityInfo.name}</h2>
+      <p className="searchedCityDescription">{cityInfo.description}</p>
 
       <div className="carousel-wrapper">
         <button className="carousel-btn prev" onClick={prevSlide}>

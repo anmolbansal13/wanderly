@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
-export default function SearchForm() {
+const url = "http://localhost:3000";
+export default function SearchForm({ onCitySelect }) {
   const [searchInput, setSearchInput] = useState("");
   const [predictions, setPredictions] = useState([]);
 
-  // Load Google Maps script dynamically
   useEffect(() => {
-    const autocomplete = new window.google.maps.places.AutocompleteService();
+    const fetchPredictions = async () => {
+      if (searchInput) {
+        try {
+          const response = await fetch(
+            `${url}/autocompleteSearch?input=${encodeURIComponent(searchInput)}`
+          );
+          const data = await response.json();
 
-    if (searchInput) {
-      autocomplete.getPlacePredictions(
-        {
-          input: searchInput,
-          types: ["(cities)"],
-        },
-        (results, status) => {
-          if (status === "OK") {
-            setPredictions(results);
+          if (response.ok) {
+            setPredictions(data.predictions);
           }
+        } catch (error) {
+          console.error("Error fetching predictions:", error);
+          setPredictions([]);
         }
-      );
-    } else {
-      setPredictions([]);
-    }
+      } else {
+        setPredictions([]);
+      }
+    };
+
+    // Add debounce to avoid too many API calls
+    const timeoutId = setTimeout(() => {
+      fetchPredictions();
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
   }, [searchInput]);
 
   const handleSubmit = (e) => {
@@ -33,6 +42,13 @@ export default function SearchForm() {
   const handleSelect = (prediction) => {
     setSearchInput(prediction.description);
     setPredictions([]);
+    onCitySelect(prediction.place_id);
+  };
+
+  const handleClick = (prediction) => {
+    setSearchInput(prediction.description);
+    setPredictions([]);
+    onCitySelect(prediction.place_id);
   };
 
   return (
@@ -62,7 +78,11 @@ export default function SearchForm() {
           ))}
         </ul>
       )}
-      <button type="submit" className="searchBtn">
+      <button
+        type="submit"
+        className="searchBtn"
+        onClick={() => handleClick(predictions[0])}
+      >
         Search
       </button>
     </form>
