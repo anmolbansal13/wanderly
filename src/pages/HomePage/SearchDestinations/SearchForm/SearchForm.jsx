@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
 const url = "http://localhost:3000";
-export default function SearchForm({ onCitySelect }) {
+export default function SearchForm({ onCitySelect, setCityName }) {
   const [searchInput, setSearchInput] = useState("");
   const [searchOutput, setSearchOutput] = useState("");
   const [predictions, setPredictions] = useState([]);
-
+   
   useEffect(() => {
     const fetchPredictions = async () => {
       if (searchInput && searchInput !== searchOutput) {
@@ -44,6 +44,7 @@ export default function SearchForm({ onCitySelect }) {
   const handlePredictionSelection = (prediction) => {
     setSearchOutput(prediction.description);
     setSearchInput(prediction.description);
+    setCityName(prediction.description);
     onCitySelect(prediction.place_id);
   };
 
