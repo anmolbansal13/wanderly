@@ -4,43 +4,55 @@ import { useNavigate } from "react-router-dom";
 import "./Bookings.css";
 const url = "http://localhost:3000";
 
-const Bookings = ({ isLoggedIn, setLoginPopup, cityName }) => {
+const Bookings = ({
+  isLoggedIn,
+  setLoginPopup,
+  cityName,
+  fromCity,
+  selectedDate,
+}) => {
   const navigate = useNavigate();
 
   const handleStartTrip = async () => {
     if (isLoggedIn) {
-      await navigate("/offtrip");
+      await navigate(`/offtrip/${encodeURIComponent(cityName)}`);
     } else {
       setLoginPopup("/offtrip");
     }
   };
 
-  const searchFlights = async (arrivalQuery) => {
+  const searchFlights = async ({ cityName, fromCity }) => {
     try {
+      //console.log(arrivalQuery, departureQuery);
       const response = await fetch(`${url}/lowest-flight-price`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ arrivalQuery: arrivalQuery }),
+        body: JSON.stringify({
+          arrivalQuery: cityName,
+          departureQuery: fromCity,
+          date: selectedDate,
+        }),
       });
-      
+
       const data = await response.json();
       return data; // This will return the price from best_flights[0]
     } catch (error) {
-      console.error('Error fetching flights:', error);
+      console.error("Error fetching flights:", error);
       throw error;
     }
   };
 
   const [price, setPrice] = useState(null);
-  
-  const handleSearch = async (destination) => {
+
+  const handleSearch = async ({ cityName, fromCity }) => {
     try {
-      const flightPrice = await searchFlights(destination);
+      console.log(cityName, fromCity);
+      const flightPrice = await searchFlights({ cityName, fromCity });
       setPrice(flightPrice);
     } catch (error) {
-      console.error('Failed to fetch flight prices:', error);
+      console.error("Failed to fetch flight prices:", error);
     }
   };
 
@@ -48,9 +60,14 @@ const Bookings = ({ isLoggedIn, setLoginPopup, cityName }) => {
     <div className="bookings-container">
       <h1 className="bookings-title">Bookings</h1>
       <div className="booking-options">
-        <div className="booking-card" onClick={() => handleSearch(cityName)}>
+        <div
+          className="booking-card"
+          onClick={async () => await handleSearch({ cityName, fromCity })}
+        >
           <div className="booking-icon">{"✈️"}</div>
-          <h2 className="booking-name">Flights starting ₹ {price ? price+'/-' : "..."}</h2>
+          <h2 className="booking-name">
+            Flights starting ₹ {price ? price + "/-" : "..."}
+          </h2>
         </div>
         <div className="booking-card">
           <div className="booking-icon">{"🏨"}</div>

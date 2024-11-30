@@ -42,10 +42,10 @@ function App() {
             />
           }
         />
-        <Route path="/offtrip" element={<OffTrip />} />
+        <Route path="/offtrip/:cityName" element={<OffTrip />} />
         <Route path="/ontrip" element={<OnTrip />} />
       </Routes>
-    </ div>
+    </div>
   );
 }
 

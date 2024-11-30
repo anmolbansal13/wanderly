@@ -2,11 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
 const url = "http://localhost:3000";
-export default function SearchForm({ onCitySelect, setCityName }) {
+export default function SearchForm({
+  onCitySelect,
+  setCityName,
+  setFromCity,
+  selectedDate,
+  setSelectedDate,
+}) {
   const [searchInput, setSearchInput] = useState("");
+  const [searchInput0, setSearchInput0] = useState("");
   const [searchOutput, setSearchOutput] = useState("");
+  const [searchOutput0, setSearchOutput0] = useState("");
   const [predictions, setPredictions] = useState([]);
-   
+  const [predictions0, setPredictions0] = useState([]);
+
   useEffect(() => {
     const fetchPredictions = async () => {
       if (searchInput && searchInput !== searchOutput) {
@@ -35,6 +44,35 @@ export default function SearchForm({ onCitySelect, setCityName }) {
     return () => clearTimeout(timeoutId);
   }, [searchInput, searchOutput]);
 
+  useEffect(() => {
+    const fetchPredictions = async () => {
+      if (searchInput0 && searchInput0 !== searchOutput0) {
+        try {
+          const response = await fetch(
+            `${url}/autocompleteSearch?input=${encodeURIComponent(
+              searchInput0
+            )}`
+          );
+          const data = await response.json();
+
+          if (response.ok) {
+            setPredictions0(data.predictions);
+          }
+        } catch (error) {
+          console.error("Error fetching predictions:", error);
+          setPredictions0([]);
+        }
+      } else {
+        setPredictions0([]);
+      }
+    };
+    const timeoutId = setTimeout(() => {
+      fetchPredictions();
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchInput0, searchOutput0]);
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   setSearchOutput(searchInput);
@@ -47,14 +85,41 @@ export default function SearchForm({ onCitySelect, setCityName }) {
     setCityName(prediction.description);
     onCitySelect(prediction.place_id);
   };
-
+  const handlePredictionSelection0 = (prediction) => {
+    setSearchOutput0(prediction.description);
+    setSearchInput0(prediction.description);
+    setFromCity(prediction.description);
+    //setCityName(prediction.description);
+    //onCitySelect(prediction.place_id);
+  };
   return (
     <form className="search-form" onSubmit={(e) => e.preventDefault()}>
       <h4>From</h4>
-      <label className="currentCity">Chandigarh</label>
-      <button type="button" className="filters">
+      {/* <label className="currentCity">Chandigarh</label> */}
+      <input
+        type="text"
+        name="searchbar0"
+        id="searchbar"
+        placeholder="Search for Destination..."
+        value={searchInput0}
+        onChange={(e) => setSearchInput0(e.target.value)}
+      />
+      {predictions0.length > 0 && (
+        <ul className="predictions-list">
+          {predictions0.map((prediction) => (
+            <li
+              key={prediction.place_id}
+              onClick={() => handlePredictionSelection0(prediction)}
+            >
+              {prediction.description}
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* <button type="button" className="filters">
         Filters
-      </button>
+      </button> */}
+      <h4>To</h4>
       <input
         type="text"
         name="searchbar"
@@ -75,10 +140,18 @@ export default function SearchForm({ onCitySelect, setCityName }) {
           ))}
         </ul>
       )}
+      <input
+        type="date"
+        value={selectedDate}
+        onChange={(e) => setSelectedDate(e.target.value)}
+        min={new Date().toISOString().split("T")[0]}
+      />
       <button
         type="submit"
         className="searchBtn"
-        onClick={() => predictions.length > 0 && handlePredictionSelection(predictions[0])}
+        onClick={() =>
+          predictions.length > 0 && handlePredictionSelection(predictions[0])
+        }
       >
         Search
       </button>
