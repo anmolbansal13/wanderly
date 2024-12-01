@@ -144,7 +144,8 @@
   margin: 5px;
 }
 
-.detail-box {
+.detail-box,
+.calender {
   background-color: #ffeac5;
   color: black;
   padding: 15px;

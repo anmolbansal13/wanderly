@@ -9,6 +9,9 @@ export default function OffTrip() {
   const [attractions, setAttractions] = useState([]);
   const [activities, setActivities] = useState([]);
 
+  const [date, setDate] = useState(new Date());
+  const [budget, setBudget] = useState(0);
+
   // Fetch attractions from your API
   useEffect(() => {
     // if (cityName!==null && cityName!="null") {
@@ -24,8 +27,6 @@ export default function OffTrip() {
       );
       const data = await response.json();
       setAttractions(data); //API returns array of objects with name and imageUrl
-
-      console.log(url + "/" + attractions[0].imageUrl);
     } catch (error) {
       console.error("Error fetching attractions:", error);
     }
@@ -40,6 +41,63 @@ export default function OffTrip() {
   const removeActivityFromPlan = (activity) => {
     setAttractions([...attractions, activity]);
     setActivities(activities.filter((item) => item.id !== activity.id));
+  };
+
+  const handleSaveTrip = async () => {
+    try {
+      const response = await fetch(`${url}/saveTrip`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          tripLocation: cityName,
+          tripStartDate: date,
+          tripBudget: budget,
+          tripAttractions: activities.map((activity) => ({
+            name: activity.name,
+            photoUrl: activity.photoUrl,
+          })),
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Trip saved successfully:", data);
+    } catch (error) {
+      console.error("Error saving trip:", error);
+      alert("Failed to save trip. Please try again.");
+    }
+  };
+
+  const handleStartTrip = async () => {
+    try {
+      const response = await fetch(`${url}/startTrip`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          tripLocation: cityName,
+          tripBudget: budget,
+          tripAttractions: activities.map((activity) => ({
+            name: activity.name,
+            photoUrl: activity.photoUrl,
+          })),
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Trip saved successfully:", data);
+    } catch (error) {
+      console.error("Error saving trip:", error);
+      alert("Failed to save trip. Please try again.");
+    }
   };
 
   return (
@@ -86,9 +144,32 @@ export default function OffTrip() {
         </section>
       </main>
       <aside className="details">
-        <div className="detail-box">Our Estimated Budget - Rs. 8000</div>
-        <div className="detail-box">Our Estimated Time - 3 Days</div>
-        <div className="start-trip">Start a Trip</div>
+        <div className="detail-box">
+          Your Estimated Budget
+          <input
+            type="number"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            placeholder="Enter your budget"
+          />
+        </div>
+        <div className="calender">
+          Start Date
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            defaultValue={new Date().toISOString().split("T")[0]}
+            min={new Date().toISOString().split("T")[0]}
+            id="date"
+          />
+        </div>
+        <div className="start-trip" onClick={handleSaveTrip}>
+          Save Trip
+        </div>
+        <div className="start-trip" onClick={handleStartTrip}>
+          Start Trip
+        </div>
       </aside>
     </div>
   );
