@@ -94,13 +94,13 @@ export default function SearchForm({
   };
   return (
     <form className="search-form" onSubmit={(e) => e.preventDefault()}>
-      <h4>From</h4>
+      <h4 id="from">From</h4>
       {/* <label className="currentCity">Chandigarh</label> */}
       <input
         type="text"
         name="searchbar0"
-        id="searchbar"
-        placeholder="Search for Destination..."
+        id="currentCity"
+        placeholder="Current Location"
         value={searchInput0}
         onChange={(e) => setSearchInput0(e.target.value)}
       />
@@ -119,11 +119,11 @@ export default function SearchForm({
       {/* <button type="button" className="filters">
         Filters
       </button> */}
-      <h4>To</h4>
+      <h4 id="to">To</h4>
       <input
         type="text"
         name="searchbar"
-        id="searchbar"
+        id="destinationCity"
         placeholder="Search for Destination..."
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
@@ -145,6 +145,7 @@ export default function SearchForm({
         value={selectedDate}
         onChange={(e) => setSelectedDate(e.target.value)}
         min={new Date().toISOString().split("T")[0]}
+        id="date"
       />
       <button
         type="submit"

@@ -12,7 +12,9 @@ const Bookings = ({
   selectedDate,
 }) => {
   const navigate = useNavigate();
-
+  const [price, setPrice] = useState(null);
+  const [lastSearch, setLastSearch] = useState({ cityName: '', fromCity: '' });
+  
   const handleStartTrip = async () => {
     if (isLoggedIn) {
       await navigate(`/offtrip/${encodeURIComponent(cityName)}`);
@@ -44,17 +46,20 @@ const Bookings = ({
     }
   };
 
-  const [price, setPrice] = useState(null);
 
-  const handleSearch = async ({ cityName, fromCity }) => {
-    try {
-      console.log(cityName, fromCity);
-      const flightPrice = await searchFlights({ cityName, fromCity });
-      setPrice(flightPrice);
-    } catch (error) {
-      console.error("Failed to fetch flight prices:", error);
-    }
-  };
+  const handleSearchFlights = async () => {
+    if (cityName && fromCity && cityName !== fromCity && 
+      (cityName !== lastSearch.cityName || fromCity !== lastSearch.fromCity)) {
+     
+     try {
+       const flightPrice = await searchFlights({ cityName, fromCity });
+       setPrice(flightPrice);
+       setLastSearch({ cityName, fromCity });
+     } catch (error) {
+       console.error("Failed to fetch flight prices:", error);
+     }
+   }
+ };
 
   return (
     <div className="bookings-container">
@@ -62,11 +67,11 @@ const Bookings = ({
       <div className="booking-options">
         <div
           className="booking-card"
-          onClick={async () => await handleSearch({ cityName, fromCity })}
+          onClick={handleSearchFlights}
         >
           <div className="booking-icon">{"✈️"}</div>
           <h2 className="booking-name">
-            Flights starting ₹ {price ? price + "/-" : "..."}
+            Flights starting ₹ {price ? price + "/-" : "....."}
           </h2>
         </div>
         <div className="booking-card">

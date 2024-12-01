@@ -5,6 +5,7 @@
     width: 100%;
     /* padding: 3px; */
     overflow: hidden;
+    justify-content: center;
 }
 @media screen and (max-width: 768px) {
     .main-body{

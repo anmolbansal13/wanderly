@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./OffTrip.css";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 const url = "http://localhost:3000";
 export default function OffTrip() {
@@ -11,6 +11,7 @@ export default function OffTrip() {
 
   // Fetch attractions from your API
   useEffect(() => {
+    // if (cityName!==null && cityName!="null") {
     if (cityName) {
       fetchAttractions();
     }
@@ -22,7 +23,7 @@ export default function OffTrip() {
         `${url}/attractions?city=${encodeURIComponent(cityName)}`
       );
       const data = await response.json();
-      setAttractions(data); // Assuming your API returns array of objects with name and imageUrl
+      setAttractions(data); //API returns array of objects with name and imageUrl
 
       console.log(url + "/" + attractions[0].imageUrl);
     } catch (error) {
