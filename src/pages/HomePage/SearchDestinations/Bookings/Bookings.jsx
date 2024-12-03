@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Bookings.css";
-const url =import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_BACKEND_URL;
 
 const Bookings = ({
   isLoggedIn,
@@ -13,13 +13,25 @@ const Bookings = ({
 }) => {
   const navigate = useNavigate();
   const [price, setPrice] = useState(null);
-  const [lastSearch, setLastSearch] = useState({ cityName: '', fromCity: '' });
-  
+
+  const [isCity, setIsCity] = useState(false);
+
+  useEffect(() => {
+    if (cityName) {
+      setIsCity(true);
+    }
+    if (cityName === null) {
+      setIsCity(false);
+    }
+  }, [cityName]);
+
+  const [lastSearch, setLastSearch] = useState({ cityName: "", fromCity: "" });
+
   const handleStartTrip = async () => {
     if (isLoggedIn) {
       await navigate(`/offtrip/${encodeURIComponent(cityName)}`);
     } else {
-      setLoginPopup("/offtrip");
+      setLoginPopup(`/offtrip/${encodeURIComponent(cityName)}`);
     }
   };
 
@@ -46,29 +58,28 @@ const Bookings = ({
     }
   };
 
-
   const handleSearchFlights = async () => {
-    if (cityName && fromCity && cityName !== fromCity && 
-      (cityName !== lastSearch.cityName || fromCity !== lastSearch.fromCity)) {
-     
-     try {
-       const flightPrice = await searchFlights({ cityName, fromCity });
-       setPrice(flightPrice);
-       setLastSearch({ cityName, fromCity });
-     } catch (error) {
-       console.error("Failed to fetch flight prices:", error);
-     }
-   }
- };
+    if (
+      cityName &&
+      fromCity &&
+      cityName !== fromCity &&
+      (cityName !== lastSearch.cityName || fromCity !== lastSearch.fromCity)
+    ) {
+      try {
+        const flightPrice = await searchFlights({ cityName, fromCity });
+        setPrice(flightPrice);
+        setLastSearch({ cityName, fromCity });
+      } catch (error) {
+        console.error("Failed to fetch flight prices:", error);
+      }
+    }
+  };
 
   return (
     <div className="bookings-container">
       <h1 className="bookings-title">Bookings</h1>
       <div className="booking-options">
-        <div
-          className="booking-card"
-          onClick={handleSearchFlights}
-        >
+        <div className="booking-card" onClick={handleSearchFlights}>
           <div className="booking-icon">{"✈️"}</div>
           <h2 className="booking-name">
             Flights starting ₹ {price ? price + "/-" : "....."}
@@ -84,11 +95,14 @@ const Bookings = ({
         </div>
         <div
           className="booking-card"
-          onClick={handleStartTrip}
+          diabled={isCity}
+          onClick={isCity && handleStartTrip}
           style={{ cursor: "pointer" }}
         >
           <div className="booking-icon">{"..."}</div>
-          <h2 className="booking-name">{"Start a Trip"}</h2>
+          <h2 className="booking-name">
+            {isCity ? "Start a Trip" : "Choose Destination"}
+          </h2>
         </div>
       </div>
     </div>

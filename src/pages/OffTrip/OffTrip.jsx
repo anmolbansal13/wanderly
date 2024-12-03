@@ -9,8 +9,8 @@ export default function OffTrip() {
   const [attractions, setAttractions] = useState([]);
   const [activities, setActivities] = useState([]);
 
-  const [date, setDate] = useState(new Date());
-  const [budget, setBudget] = useState();
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const [budget, setBudget] = useState(0);
   const [visibleAttractions, setVisibleAttractions] = useState([]);
 
   // Fetch attractions from your API
@@ -37,12 +37,18 @@ export default function OffTrip() {
   // Modified function to handle attraction objects
   const addAttractionToPlan = (attraction) => {
     setActivities([...activities, attraction]);
-    const newAttractions = attractions.filter((item) => item.id !== attraction.id);
+    const newAttractions = attractions.filter(
+      (item) => item.id !== attraction.id
+    );
     setAttractions(newAttractions);
-    
+
     // Update visible attractions
-    const currentVisible = visibleAttractions.filter((item) => item.id !== attraction.id);
-    const nextItem = newAttractions.find(item => !visibleAttractions.includes(item));
+    const currentVisible = visibleAttractions.filter(
+      (item) => item.id !== attraction.id
+    );
+    const nextItem = newAttractions.find(
+      (item) => !visibleAttractions.includes(item)
+    );
     if (nextItem) {
       currentVisible.push(nextItem);
     }
@@ -53,7 +59,7 @@ export default function OffTrip() {
     setActivities(activities.filter((item) => item.id !== activity.id));
     const updatedAttractions = [...attractions, activity];
     setAttractions(updatedAttractions);
-    
+
     // Add the removed item back to visible attractions if there's space
     if (visibleAttractions.length < 5) {
       setVisibleAttractions([...visibleAttractions, activity]);
@@ -120,43 +126,43 @@ export default function OffTrip() {
   return (
     <div className="trip-planner">
       <div className="main-content">
-          <h2>Attractions and Activities in {cityName}</h2>
-          <div className="attractions">
-            {visibleAttractions.map((attraction) => (
-              <div className="attraction-card" key={attraction.id}>
-                <img
-                  src={url + attraction.photoUrl}
-                  alt={attraction.name}
-                  className="attraction-image"
-                />
-                <div className="attraction-details">
-                  <span className="attraction-name">{attraction.name}</span>
-                  <button
-                    className="add-button"
-                    onClick={() => addAttractionToPlan(attraction)}
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <h2>Plan Manager</h2>
-          <div className="activities">
-            {activities.map((activity) => (
-              <div className="activity" key={activity.id}>
-                <img
-                  src={url + activity.photoUrl}
-                  alt={activity.name}
-                  className="activity-image"
-                />
-                <span>{activity.name}</span>
-                <button onClick={() => removeActivityFromPlan(activity)}>
-                  Remove
+        <h2>Attractions and Activities in {cityName}</h2>
+        <div className="attractions">
+          {visibleAttractions.map((attraction) => (
+            <div className="attraction-card" key={attraction.id}>
+              <img
+                src={url + attraction.photoUrl}
+                alt={attraction.name}
+                className="attraction-image"
+              />
+              <div className="attraction-details">
+                <span className="attraction-name">{attraction.name}</span>
+                <button
+                  className="add-button"
+                  onClick={() => addAttractionToPlan(attraction)}
+                >
+                  Add
                 </button>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+        <h2>Plan Manager</h2>
+        <div className="activities">
+          {activities.map((activity) => (
+            <div className="activity" key={activity.id}>
+              <img
+                src={url + activity.photoUrl}
+                alt={activity.name}
+                className="activity-image"
+              />
+              <span>{activity.name}</span>
+              <button onClick={() => removeActivityFromPlan(activity)}>
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
       <aside className="details">
         <div className="detail-box">
@@ -167,8 +173,8 @@ export default function OffTrip() {
             onChange={(e) => setBudget(e.target.value)}
             placeholder="Enter your budget"
             className="estimated-budget"
-            min = "0"
-            max = "100000000"
+            min="0"
+            max="100000000"
           />
         </div>
         <div className="calender">
