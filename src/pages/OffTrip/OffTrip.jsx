@@ -88,7 +88,7 @@ export default function OffTrip() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Trip saved successfully:", data);
+      // console.log("Trip saved successfully:", data);
     } catch (error) {
       console.error("Error saving trip:", error);
       alert("Failed to save trip. Please try again.");
@@ -116,7 +116,7 @@ export default function OffTrip() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Trip saved successfully:", data);
+      // console.log("Trip saved successfully:", data);
     } catch (error) {
       console.error("Error saving trip:", error);
       alert("Failed to save trip. Please try again.");
@@ -183,7 +183,6 @@ export default function OffTrip() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            defaultValue={new Date().toISOString().split("T")[0]}
             min={new Date().toISOString().split("T")[0]}
             className="start-date"
           />

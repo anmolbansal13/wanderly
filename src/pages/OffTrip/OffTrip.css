@@ -2,23 +2,20 @@
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   display: flex;
-  /* flex-direction: column; */
   height: 100%;
   margin: 5px;
   justify-content: center;
+  margin-top: 20px;
 }
-
-.trip-planner .main-content {
+.trip-planner > .main-content {
   display: flex;
   flex-direction: column;
   align-items: start;
   flex: 1;
-  padding: 20px;
-  max-width: 75%;
+  max-width: 70%;
   min-height: 90vh;
   background-color: #f0f0f0;
-  margin: 10px;
-  margin-right: 20px;
+  margin: 10px 20px 10px 10px;
   padding: 20px;
   border-radius: 10px;
   height: auto;
@@ -28,8 +25,7 @@
 
 .main-content h2 {
   color: black;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 15px 0;
 }
 
 .attractions {
@@ -79,6 +75,7 @@
   background: #007bff;
   color: white;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .add-button:hover {
@@ -91,18 +88,15 @@
   justify-content: left;
   gap: 10px;
   flex-wrap: wrap;
-  max-height: auto;
   padding: 20px;
 }
 
 .activity {
   background-color: #fff;
   color: black;
-  padding: 5px;
   border-radius: 8px;
   text-align: center;
   font-weight: bold;
-  border: 1px solid #ddd;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -111,7 +105,6 @@
   margin: 5px 0;
   justify-content: space-between;
 }
-
 .activity button {
   padding: 5px 15px;
   border-radius: 4px;
@@ -130,8 +123,7 @@
   object-fit: cover;
   border-radius: 4px;
 }
-
-.trip-planner .details {
+.trip-planner > .details {
   flex: 1;
   display: flex;
   align-items: flex-start;
@@ -147,8 +139,8 @@
 .calender {
   background-color: #ffeac5;
   color: black;
-  padding: 15px;
-  border-radius: 8px;
+  padding: 1.2rem;
+  border-radius: 12px;
   text-align: center;
   font-weight: bold;
   display: flex;
@@ -158,33 +150,46 @@
   width: 100%;
   font-size: large;
   height: 8rem;
-}
-.estimated-budget, .start-date{
-  text-align: center;
-  border-radius: 2rem;
-  padding: 3px;
-  margin-top: 8px;
-  width: min-content;
-  margin: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
-.start-trip, .save-trip {
+.detail-box:hover,
+.calender:hover {
+  transform: translateY(-2px);
+}
+
+.estimated-budget,
+.start-date {
+  text-align: center;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  margin: 8px auto;
+  width: fit-content;
+  background-color: white;
+  color: black;
+}
+
+.start-trip,
+.save-trip {
   background-color: #ffeac5;
   color: black;
-  /* height: 20%; */
   width: 9rem;
   height: 9rem;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 .start-trip:hover,
 .save-trip:hover {
   background-color: black;
   cursor: pointer;
   color: #ffffff;
+  transform: scale(1.05);
 }

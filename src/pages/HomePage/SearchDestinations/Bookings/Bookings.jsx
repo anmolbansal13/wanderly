@@ -14,23 +14,24 @@ const Bookings = ({
   const navigate = useNavigate();
   const [price, setPrice] = useState(null);
 
-  const [isCity, setIsCity] = useState(false);
+  const [isCitySelected, setIsCitySelected] = useState(false);
 
   useEffect(() => {
     if (cityName) {
-      setIsCity(true);
+      setIsCitySelected(true);
     }
     if (cityName === null) {
-      setIsCity(false);
+      setIsCitySelected(false);
     }
   }, [cityName]);
 
   const [lastSearch, setLastSearch] = useState({ cityName: "", fromCity: "" });
 
   const handleStartTrip = async () => {
-    if (isLoggedIn) {
+    if (isCitySelected && isLoggedIn) {
       await navigate(`/offtrip/${encodeURIComponent(cityName)}`);
-    } else {
+    }
+    if (isCitySelected && !isLoggedIn) {
       setLoginPopup(`/offtrip/${encodeURIComponent(cityName)}`);
     }
   };
@@ -95,13 +96,12 @@ const Bookings = ({
         </div>
         <div
           className="booking-card"
-          diabled={isCity}
-          onClick={isCity && handleStartTrip}
-          style={{ cursor: "pointer" }}
+          disabled={isCitySelected}
+          onClick={handleStartTrip}
         >
           <div className="booking-icon">{"..."}</div>
           <h2 className="booking-name">
-            {isCity ? "Start a Trip" : "Choose Destination"}
+            {isCitySelected ? "Start a Trip" : "Choose Destination"}
           </h2>
         </div>
       </div>

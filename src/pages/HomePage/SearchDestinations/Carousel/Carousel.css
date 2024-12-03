@@ -36,14 +36,14 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   color: white;
   border: none;
   cursor: pointer;
   padding: 10px 15px;
   font-size: 18px;
   z-index: 100;
-  border-radius: 50%; /* Rounded button */
+  border-radius: 50%; 
   width: 40px;
   height: 40px;
   display: flex;
@@ -52,11 +52,11 @@
 }
 
 .carousel-btn.prev {
-  left: 10px;
+  left: 80px;
 }
 
 .carousel-btn.next {
-  right: 10px;
+  right: 80px;
 }
 
 .carousel-btn:hover {

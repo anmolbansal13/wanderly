@@ -41,9 +41,12 @@
 #destinationCity:hover {
   cursor: pointer;
   transform: scale(1.05); /* Slightly more noticeable hover effect */
-  /* background-color: #ffeac5; Add color on hover for better visual feedback */
+  /* background-color: hsl(0, 0%, 0%); */
 }
-
+.searchBtn:hover{
+  background-color: black;
+  color: white;
+}
 #from {
   grid-area: a;
 }

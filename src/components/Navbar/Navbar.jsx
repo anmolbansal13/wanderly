@@ -3,7 +3,7 @@ import LoginPopup from "../LoginPopup/LoginPopup";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 
-const url =import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_BACKEND_URL;
 export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -40,14 +40,16 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   return (
     <div className="navbar">
       <i className="fa-solid fa-bars hamicon"></i>
-      <h1 className="websiteName" onClick={goToHome}>Wanderly</h1>
+      <h1 className="websiteName" onClick={goToHome}>
+        Wanderly
+      </h1>
 
       {isLoggedIn ? (
-        <div className="profile-container">
-          <i
-            className="fa-solid fa-user usericon"
-            onClick={() => setShowDropdown(!showDropdown)}
-          ></i>
+        <div
+          className="profile-container"
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
+          <i className="fa-solid fa-user usericon"></i>
           {showDropdown && (
             <div className="dropdown-menu">
               <div className="dropdown-item" style={{ "--item-index": 0 }}>
