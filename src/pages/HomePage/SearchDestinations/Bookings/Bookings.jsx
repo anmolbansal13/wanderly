@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Bookings.css";
-const url = "http://localhost:3000";
+const url =import.meta.env.VITE_BACKEND_URL;
 
 const Bookings = ({
   isLoggedIn,

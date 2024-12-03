@@ -102,10 +102,10 @@ export default function OffTrip() {
 
   return (
     <div className="trip-planner">
-      <main className="main-content">
-        <section className="plan-manager">
-          <h2>Attractions and Activities in {cityName}</h2>
+      <div className="main-content">
+        {/* <section className="plan-manager"> */}
           <div className="attractions">
+          <h2>Attractions and Activities in {cityName}</h2>
             {attractions.map((attraction) => (
               <div className="attraction-card" key={attraction.id}>
                 <img
@@ -125,8 +125,8 @@ export default function OffTrip() {
               </div>
             ))}
           </div>
-          <h2>Plan Manager</h2>
           <div className="activities">
+          <h2>Plan Manager</h2>
             {activities.map((activity) => (
               <div className="activity" key={activity.id}>
                 <img
@@ -141,8 +141,8 @@ export default function OffTrip() {
               </div>
             ))}
           </div>
-        </section>
-      </main>
+        {/* </section> */}
+      </div>
       <aside className="details">
         <div className="detail-box">
           Your Estimated Budget
@@ -151,6 +151,7 @@ export default function OffTrip() {
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
             placeholder="Enter your budget"
+            className="estimated-budget"
           />
         </div>
         <div className="calender">
@@ -161,10 +162,10 @@ export default function OffTrip() {
             onChange={(e) => setDate(e.target.value)}
             defaultValue={new Date().toISOString().split("T")[0]}
             min={new Date().toISOString().split("T")[0]}
-            id="date"
+            className="start-date"
           />
         </div>
-        <div className="start-trip" onClick={handleSaveTrip}>
+        <div className="save-trip" onClick={handleSaveTrip}>
           Save Trip
         </div>
         <div className="start-trip" onClick={handleStartTrip}>

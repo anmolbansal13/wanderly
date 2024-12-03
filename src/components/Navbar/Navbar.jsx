@@ -3,7 +3,7 @@ import LoginPopup from "../LoginPopup/LoginPopup";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 
-const url = "http://localhost:3000";
+const url =import.meta.env.VITE_BACKEND_URL;
 export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);

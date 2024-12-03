@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Carousel.css";
 
-const url = "http://localhost:3000";
-
+const url =import.meta.env.VITE_BACKEND_URL;
 export default function Carousel({ selectedCity }) {
   const [images, setImages] = useState([
     {
