@@ -75,7 +75,7 @@ export default function Carousel({ selectedCity }) {
         <div className="carousel-images">
           <img
             src={url+images[currentIndex].url}
-            alt={images[currentIndex].description}
+            alt="loading...."
             className="carousel-img active"
           />
         </div>

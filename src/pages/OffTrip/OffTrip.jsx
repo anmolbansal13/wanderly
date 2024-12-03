@@ -10,7 +10,8 @@ export default function OffTrip() {
   const [activities, setActivities] = useState([]);
 
   const [date, setDate] = useState(new Date());
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState();
+  const [visibleAttractions, setVisibleAttractions] = useState([]);
 
   // Fetch attractions from your API
   useEffect(() => {
@@ -26,7 +27,8 @@ export default function OffTrip() {
         `${url}/attractions?city=${encodeURIComponent(cityName)}`
       );
       const data = await response.json();
-      setAttractions(data); //API returns array of objects with name and imageUrl
+      setAttractions(data);
+      setVisibleAttractions(data.slice(0, 5)); // Show first 5 items
     } catch (error) {
       console.error("Error fetching attractions:", error);
     }
@@ -35,12 +37,27 @@ export default function OffTrip() {
   // Modified function to handle attraction objects
   const addAttractionToPlan = (attraction) => {
     setActivities([...activities, attraction]);
-    setAttractions(attractions.filter((item) => item.id !== attraction.id));
+    const newAttractions = attractions.filter((item) => item.id !== attraction.id);
+    setAttractions(newAttractions);
+    
+    // Update visible attractions
+    const currentVisible = visibleAttractions.filter((item) => item.id !== attraction.id);
+    const nextItem = newAttractions.find(item => !visibleAttractions.includes(item));
+    if (nextItem) {
+      currentVisible.push(nextItem);
+    }
+    setVisibleAttractions(currentVisible);
   };
 
   const removeActivityFromPlan = (activity) => {
-    setAttractions([...attractions, activity]);
     setActivities(activities.filter((item) => item.id !== activity.id));
+    const updatedAttractions = [...attractions, activity];
+    setAttractions(updatedAttractions);
+    
+    // Add the removed item back to visible attractions if there's space
+    if (visibleAttractions.length < 5) {
+      setVisibleAttractions([...visibleAttractions, activity]);
+    }
   };
 
   const handleSaveTrip = async () => {
@@ -103,10 +120,9 @@ export default function OffTrip() {
   return (
     <div className="trip-planner">
       <div className="main-content">
-        {/* <section className="plan-manager"> */}
-          <div className="attractions">
           <h2>Attractions and Activities in {cityName}</h2>
-            {attractions.map((attraction) => (
+          <div className="attractions">
+            {visibleAttractions.map((attraction) => (
               <div className="attraction-card" key={attraction.id}>
                 <img
                   src={url + attraction.photoUrl}
@@ -125,8 +141,8 @@ export default function OffTrip() {
               </div>
             ))}
           </div>
-          <div className="activities">
           <h2>Plan Manager</h2>
+          <div className="activities">
             {activities.map((activity) => (
               <div className="activity" key={activity.id}>
                 <img
@@ -136,12 +152,11 @@ export default function OffTrip() {
                 />
                 <span>{activity.name}</span>
                 <button onClick={() => removeActivityFromPlan(activity)}>
-                  X
+                  Remove
                 </button>
               </div>
             ))}
           </div>
-        {/* </section> */}
       </div>
       <aside className="details">
         <div className="detail-box">
@@ -152,6 +167,8 @@ export default function OffTrip() {
             onChange={(e) => setBudget(e.target.value)}
             placeholder="Enter your budget"
             className="estimated-budget"
+            min = "0"
+            max = "100000000"
           />
         </div>
         <div className="calender">
@@ -166,7 +183,7 @@ export default function OffTrip() {
           />
         </div>
         <div className="save-trip" onClick={handleSaveTrip}>
-          Save Trip
+          SAVE TRIP
         </div>
         <div className="start-trip" onClick={handleStartTrip}>
           Start Trip

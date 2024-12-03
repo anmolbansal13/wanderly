@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
-const url =import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_BACKEND_URL;
+console.log(url);
 export default function SearchForm({
   onCitySelect,
   setCityName,

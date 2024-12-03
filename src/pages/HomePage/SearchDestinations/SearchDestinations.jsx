@@ -7,15 +7,17 @@ export default function SearchDestinations({ isLoggedIn, setLoginPopup }) {
   const [selectedCity, setSelectedCity] = useState(
     "ChIJP9A_FgiHBDkRzXZQvg6oKYE"
   );
-  const [cityName, setCityName] = useState(null);
   const [fromCity, setFromCity] = useState(null);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [cityName, setCityName] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   return (
     <div className="searchDestinations">
       <SearchForm
         onCitySelect={setSelectedCity}
-        setCityName={setCityName}
         setFromCity={setFromCity}
+        setCityName={setCityName}
         setSelectedDate={setSelectedDate}
         selectedDate={selectedDate}
       />

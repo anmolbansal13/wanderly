@@ -9,6 +9,10 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
+  const goToHome = () => {
+    navigate("/");
+  };
+
   const handleLogout = async () => {
     // console.log("Logout clicked");
     try {
@@ -36,7 +40,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   return (
     <div className="navbar">
       <i className="fa-solid fa-bars hamicon"></i>
-      <h1 className="websiteName">Wanderly</h1>
+      <h1 className="websiteName" onClick={goToHome}>Wanderly</h1>
 
       {isLoggedIn ? (
         <div className="profile-container">
