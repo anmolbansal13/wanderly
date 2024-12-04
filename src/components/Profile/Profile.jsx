@@ -26,7 +26,8 @@ export default function Profile() {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    password: "",
+    newPassword: "",
+    oldPassword: "",
   });
 
   const [trips, setTrips] = useState({
@@ -112,36 +113,56 @@ export default function Profile() {
     },
   };
 
-  const handleUpdateProfile = (e) => {
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    // Handle profile update logic here
+    // const updatedUser = { ...user };
+    try {
+      const res = await fetch(`${url}/updateProfile`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await res.json();
+      if (res.status === 200) {
+        alert("Profile updated successfully 😎");
+        return;
+      }
+      alert(`Error updating profile: ${data.message}`);
+      console.log(data);
+    } catch (error) {
+      alert(`Error updating profile: ${error.message}`);
+      console.log(error);
+    }
   };
 
-  // useState(async () => {
-  //   const res = await fetch(`${url}/getTrips`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   });
-  //   const data = await res.json();
-  //   const transformedTrips = {
-  //     saved: data.saved.map((trip) => ({
-  //       id: trip._id,
-  //       destination: trip.tripLocation,
-  //       date: new Date(trip.tripStartDate).toISOString().split("T")[0],
-  //       estimatedCost: trip.tripBudget,
-  //     })),
-  //     completed: data.completed.map((trip) => ({
-  //       id: trip._id,
-  //       destination: trip.tripLocation,
-  //       date: new Date(trip.tripStartDate).toISOString().split("T")[0],
-  //       actualCost: trip.tripBudget,
-  //     })),
-  //   };
-  //   setTrips(transformedTrips);
-  // }, []);
+  useState(async () => {
+    const res = await fetch(`${url}/getTrips`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const data = await res.json();
+    const transformedTrips = {
+      saved: data.saved.map((trip) => ({
+        id: trip._id,
+        destination: trip.tripLocation,
+        date: new Date(trip.tripStartDate).toISOString().split("T")[0],
+        estimatedCost: trip.tripBudget,
+      })),
+      completed: data.completed.map((trip) => ({
+        id: trip._id,
+        destination: trip.tripLocation,
+        date: new Date(trip.tripStartDate).toISOString().split("T")[0],
+        actualCost: trip.tripBudget,
+      })),
+    };
+    setTrips(transformedTrips);
+  }, []);
 
   return (
     <div className="profile">
@@ -172,8 +193,8 @@ export default function Profile() {
             <button
               className="dropdown-toggle"
               onClick={() => {
-                setShowSavedTrips(!showSavedTrips)
-                setShowCompletedTrips(false)
+                setShowSavedTrips(!showSavedTrips);
+                setShowCompletedTrips(false);
               }}
             >
               {showSavedTrips ? "▼" : "▶"}
@@ -200,8 +221,8 @@ export default function Profile() {
             <button
               className="dropdown-toggle"
               onClick={() => {
-                setShowCompletedTrips(!showCompletedTrips)
-                setShowSavedTrips(false)
+                setShowCompletedTrips(!showCompletedTrips);
+                setShowSavedTrips(false);
               }}
             >
               {showCompletedTrips ? "▼" : "▶"}
@@ -251,15 +272,30 @@ export default function Profile() {
               />
             </div>
             <div className="form-group">
-              <label>Password:</label>
+              <label>Old Password:</label>
               <input
                 type="password"
-                value={user.password}
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                placeholder="Enter your password"
+                value={user.oldPassword}
+                onChange={(e) =>
+                  setUser({ ...user, oldPassword: e.target.value })
+                }
+                placeholder="Enter your current password"
               />
             </div>
-            <button type="submit" id="update-profile-btn">Update Profile</button>
+            <div className="form-group">
+              <label>New Password:</label>
+              <input
+                type="password"
+                value={user.newPassword}
+                onChange={(e) =>
+                  setUser({ ...user, newPassword: e.target.value })
+                }
+                placeholder="Enter new password"
+              />
+            </div>
+            <button type="submit" id="update-profile-btn">
+              Update Profile
+            </button>
           </form>
         </div>
       </div>

@@ -88,6 +88,7 @@ export default function OffTrip() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+      alert("Trip saved successfully!");
       // console.log("Trip saved successfully:", data);
     } catch (error) {
       console.error("Error saving trip:", error);
