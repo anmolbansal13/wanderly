@@ -52,7 +52,8 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
           <i className="fa-solid fa-user usericon"></i>
           {showDropdown && (
             <div className="dropdown-menu">
-              <div className="dropdown-item" style={{ "--item-index": 0 }}>
+              <div className="dropdown-item" style={{ "--item-index": 0 }}
+              onClick={() => navigate("/profile")}>
                 Profile
               </div>
               <div

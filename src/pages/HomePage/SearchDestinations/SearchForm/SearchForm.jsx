@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
 const url = import.meta.env.VITE_BACKEND_URL;
-console.log(url);
 export default function SearchForm({
   onCitySelect,
   setCityName,
@@ -96,7 +95,6 @@ export default function SearchForm({
   return (
     <form className="search-form" onSubmit={(e) => e.preventDefault()}>
       <h4 id="from">From</h4>
-      {/* <label className="currentCity">Chandigarh</label> */}
       <input
         type="text"
         name="searchbar0"
@@ -117,9 +115,6 @@ export default function SearchForm({
           ))}
         </ul>
       )}
-      {/* <button type="button" className="filters">
-        Filters
-      </button> */}
       <h4 id="to">To</h4>
       <input
         type="text"

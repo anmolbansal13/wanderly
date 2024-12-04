@@ -17,6 +17,8 @@
   height: auto; /* Adjust height automatically based on image */
   overflow: hidden;
   margin: 8px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel-img {
@@ -40,7 +42,7 @@
   color: white;
   border: none;
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 20px;
   font-size: 18px;
   z-index: 100;
   border-radius: 50%; 
@@ -49,6 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: xx-large;
 }
 
 .carousel-btn.prev {

@@ -1,0 +1,236 @@
+.profile {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #000000;
+  position: relative;
+}
+
+.profile-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #1a1a1a, #404040);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+.stat-box {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.stat-box h3 {
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.stat-box p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0 0;
+  color: #000000;
+}
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.profile-content h2 {
+  font-size: larger;
+  font-weight: 600;
+}
+.saved-trips,
+.completed-trips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.trip-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.trip-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.trip-card h3 {
+  margin: 0;
+  color: #000000;
+  font-size: 1.2rem;
+}
+
+.trip-card p {
+  margin: 5px 0;
+  color: #404040;
+  font-size: 0.9rem;
+}
+.trip-action-btn {
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: linear-gradient(45deg, #1a1a1a, #404040);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.trip-action-btn:hover {
+  background: linear-gradient(45deg, #404040, #1a1a1a);
+  transform: translateY(-2px);
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.trips-section {
+  grid-column: 1 / -1;
+}
+
+.expenditure-graph {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  order: 3;
+}
+
+.credentials-section {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  order: 4;
+  width: 100%;
+  margin: 0;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1a1a1a;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #1a1a1a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+}
+
+#update-profile-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(45deg, #1a1a1a, #404040);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#update-profile-btn:hover {
+  background: linear-gradient(45deg, #404040, #1a1a1a);
+  transform: translateY(-2px);
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+  order: 2;
+  background-color: #ffffff;
+}
+
+.saved-trips-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dropdown-toggle {
+  margin-top: 0;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+}
+
+.dropdown-toggle:hover {
+  transform: scale(1.1);
+  border: none;
+  box-shadow: none;
+}
+
+.completed-trips-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-box {
+    padding: 1rem;
+  }
+
+  .profile {
+    padding: 1rem;
+  }
+}

@@ -191,7 +191,7 @@ export default function OffTrip() {
           SAVE TRIP
         </div>
         <div className="start-trip" onClick={handleStartTrip}>
-          Start Trip
+          START TRIP
         </div>
       </aside>
     </div>

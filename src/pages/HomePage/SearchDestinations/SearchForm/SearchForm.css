@@ -13,7 +13,7 @@
 }
 #currentCity,
 #date,
-.searchBtn,
+.search-form>.searchBtn,
 #destinationCity {
   padding: 0.5em 1em;
   margin-top: auto;
@@ -37,7 +37,7 @@
 
 #currentCity:hover,
 #date:hover,
-.searchBtn:hover,
+.search-form>.searchBtn:hover,
 #destinationCity:hover {
   cursor: pointer;
   transform: scale(1.05); /* Slightly more noticeable hover effect */
@@ -100,7 +100,7 @@
 }
 
 .predictions-list li {
-  padding: 8px 10px;
+  padding: 6px 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }

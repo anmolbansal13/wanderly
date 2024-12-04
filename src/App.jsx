@@ -4,6 +4,7 @@ import Homepage from "./pages/HomePage/Homepage";
 import OffTrip from "./pages/OffTrip/OffTrip.jsx";
 import OnTrip from "./pages/OnTrip/OnTrip";
 import LoginPopup from "./components/LoginPopup/LoginPopup.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
@@ -44,6 +45,7 @@ function App() {
         />
         <Route path="/offtrip/:cityName" element={<OffTrip />} />
         <Route path="/ontrip" element={<OnTrip />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
