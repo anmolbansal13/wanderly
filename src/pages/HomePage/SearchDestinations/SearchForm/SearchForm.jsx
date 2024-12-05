@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import "./SearchForm.css";
 
 const url = import.meta.env.VITE_BACKEND_URL;
@@ -15,6 +16,19 @@ export default function SearchForm({
   const [searchOutput0, setSearchOutput0] = useState("");
   const [predictions, setPredictions] = useState([]);
   const [predictions0, setPredictions0] = useState([]);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const fetchPredictions = async () => {
@@ -73,12 +87,6 @@ export default function SearchForm({
     return () => clearTimeout(timeoutId);
   }, [searchInput0, searchOutput0]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setSearchOutput(searchInput);
-  //   onCitySelect(searchInput);
-  // };
-
   const handlePredictionSelection = (prediction) => {
     setSearchOutput(prediction.description);
     setSearchInput(prediction.description);
@@ -89,11 +97,13 @@ export default function SearchForm({
     setSearchOutput0(prediction.description);
     setSearchInput0(prediction.description);
     setFromCity(prediction.description);
-    //setCityName(prediction.description);
-    //onCitySelect(prediction.place_id);
   };
   return (
-    <form className="search-form" onSubmit={(e) => e.preventDefault()}>
+    <form
+      className="search-form"
+      onSubmit={(e) => e.preventDefault()}
+      ref={formRef}
+    >
       <h4 id="from">From</h4>
       <input
         type="text"
@@ -101,20 +111,12 @@ export default function SearchForm({
         id="currentCity"
         placeholder="Current Location"
         value={searchInput0}
-        onChange={(e) => setSearchInput0(e.target.value)}
+        onChange={(e) => {
+          setSearchInput0(e.target.value);
+          setActiveDropdown("from");
+        }}
+        onFocus={() => setActiveDropdown("from")}
       />
-      {predictions0.length > 0 && (
-        <ul className="predictions-list">
-          {predictions0.map((prediction) => (
-            <li
-              key={prediction.place_id}
-              onClick={() => handlePredictionSelection0(prediction)}
-            >
-              {prediction.description}
-            </li>
-          ))}
-        </ul>
-      )}
       <h4 id="to">To</h4>
       <input
         type="text"
@@ -122,20 +124,72 @@ export default function SearchForm({
         id="destinationCity"
         placeholder="Search for Destination..."
         value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
+        onChange={(e) => {
+          setSearchInput(e.target.value);
+          setActiveDropdown("to");
+        }}
+        onFocus={() => setActiveDropdown("to")}
       />
-      {predictions.length > 0 && (
-        <ul className="predictions-list">
-          {predictions.map((prediction) => (
-            <li
-              key={prediction.place_id}
-              onClick={() => handlePredictionSelection(prediction)}
-            >
-              {prediction.description}
-            </li>
-          ))}
-        </ul>
-      )}
+      {predictions.length > 0 &&
+        activeDropdown === "to" &&
+        createPortal(
+          <ul
+            className="predictions-list"
+            style={{
+              top:
+                document
+                  .getElementById("destinationCity")
+                  ?.getBoundingClientRect().bottom + "px",
+              left:
+                document
+                  .getElementById("destinationCity")
+                  ?.getBoundingClientRect().left + "px",
+            }}
+          >
+            {predictions.map((prediction) => (
+              <li
+                key={prediction.place_id}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handlePredictionSelection(prediction);
+                  setActiveDropdown(null);
+                }}
+              >
+                {prediction.description}
+              </li>
+            ))}
+          </ul>,
+          document.body
+        )}
+      {predictions0.length > 0 &&
+        activeDropdown === "from" &&
+        createPortal(
+          <ul
+            className="predictions-list"
+            style={{
+              top:
+                document.getElementById("currentCity")?.getBoundingClientRect()
+                  .bottom + "px",
+              left:
+                document.getElementById("currentCity")?.getBoundingClientRect()
+                  .left + "px",
+            }}
+          >
+            {predictions0.map((prediction) => (
+              <li
+                key={prediction.place_id}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handlePredictionSelection0(prediction);
+                  setActiveDropdown(null);
+                }}
+              >
+                {prediction.description}
+              </li>
+            ))}
+          </ul>,
+          document.body
+        )}
       <input
         type="date"
         value={selectedDate}

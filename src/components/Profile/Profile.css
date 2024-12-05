@@ -72,6 +72,8 @@
 }
 
 .trip-card {
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
@@ -98,7 +100,7 @@
   font-size: 0.9rem;
 }
 .trip-action-btn {
-  margin-top: 1rem;
+  margin-top: auto;
   padding: 0.8rem 1.2rem;
   background: linear-gradient(45deg, #1a1a1a, #404040);
   color: #ffffff;
@@ -113,6 +115,14 @@
   transform: translateY(-2px);
 }
 
+.trip-remove-btn {
+  margin-top: 10px;
+  background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
+}
+.trip-remove-btn:hover {
+  background: linear-gradient(45deg, #ff1a1a, #ff4d4d);
+  transform: translateY(-2px);
+}
 .profile-content {
   display: grid;
   grid-template-columns: 1fr 1fr;

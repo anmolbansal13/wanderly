@@ -31,42 +31,8 @@ export default function Profile() {
   });
 
   const [trips, setTrips] = useState({
-    saved: [
-      { id: 1, destination: "Paris", date: "2024-05-15", estimatedCost: 2500 },
-      { id: 2, destination: "Tokyo", date: "2024-07-20", estimatedCost: 3000 },
-      { id: 3, destination: "delhi", date: "2024-09-15", estimatedCost: 2500 },
-      {
-        id: 4,
-        destination: "manesar",
-        date: "2024-07-29",
-        estimatedCost: 3000,
-      },
-      { id: 5, destination: "katang", date: "2026-05-15", estimatedCost: 2500 },
-      {
-        id: 6,
-        destination: "shillong",
-        date: "2025-07-20",
-        estimatedCost: 3000,
-      },
-    ],
-    completed: [
-      { id: 1, destination: "Rome", date: "2023-12-10", actualCost: 2200 },
-      { id: 2, destination: "New York", date: "2023-09-05", actualCost: 1800 },
-      { id: 3, destination: "delhi", date: "2024-09-15", actualCost: 2500 },
-      {
-        id: 4,
-        destination: "manesar",
-        date: "2024-07-29",
-        actualCost: 3000,
-      },
-      { id: 5, destination: "katang", date: "2026-05-15", actualCost: 2500 },
-      {
-        id: 6,
-        destination: "shillong",
-        date: "2025-07-20",
-        actualCost: 3000,
-      },
-    ],
+    saved: [],
+    completed: [],
   });
   const [showSavedTrips, setShowSavedTrips] = useState(false);
   const [showCompletedTrips, setShowCompletedTrips] = useState(false);
@@ -202,17 +168,22 @@ export default function Profile() {
           </div>
           {showSavedTrips && (
             <div className="saved-trips">
-              {trips.saved
-                .sort((a, b) => new Date(a.date) - new Date(b.date))
-                .slice(0, 5)
-                .map((trip) => (
-                  <div key={trip.id} className="trip-card">
-                    <h3>{trip.destination}</h3>
-                    <p>Date: {trip.date}</p>
-                    <p>Estimated Cost: ₹{trip.estimatedCost}</p>
-                    <button className="trip-action-btn">Start Trip</button>
-                  </div>
-                ))}
+              {trips.saved.length > 0 ? (
+                trips.saved
+                  .sort((a, b) => new Date(a.date) - new Date(b.date))
+                  .slice(0, 5)
+                  .map((trip) => (
+                    <div key={trip.id} className="trip-card">
+                      <h3>{trip.destination}</h3>
+                      <p>Date: {trip.date}</p>
+                      <p>Estimated Cost: ₹{trip.estimatedCost}</p>
+                      <button className="trip-action-btn">Start Trip</button>
+                      <button className="trip-action-btn trip-remove-btn">Cancel Plan</button>
+                    </div>
+                  ))
+              ) : (
+                <p>You have no saved trips</p>
+              )}
             </div>
           )}
 
@@ -230,17 +201,21 @@ export default function Profile() {
           </div>
           {showCompletedTrips && (
             <div className="completed-trips">
-              {trips.completed
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 5)
-                .map((trip) => (
-                  <div key={trip.id} className="trip-card">
-                    <h3>{trip.destination}</h3>
-                    <p>Date: {trip.date}</p>
-                    <p>Actual Cost: ₹{trip.actualCost}</p>
-                    <button className="trip-action-btn">View Details</button>
-                  </div>
-                ))}
+              {trips.completed.length > 0 ? (
+                trips.completed
+                  .sort((a, b) => new Date(b.date) - new Date(a.date))
+                  .slice(0, 5)
+                  .map((trip) => (
+                    <div key={trip.id} className="trip-card">
+                      <h3>{trip.destination}</h3>
+                      <p>Date: {trip.date}</p>
+                      <p>Actual Cost: ₹{trip.actualCost}</p>
+                      <button className="trip-action-btn">View Details</button>
+                    </div>
+                  ))
+              ) : (
+                <p>You have no completed trips</p>
+              )}
             </div>
           )}
         </div>

@@ -39,7 +39,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
 
   return (
     <div className="navbar">
-      <i className="fa-solid fa-bars hamicon"></i>
+      {/* <i className="fa-solid fa-bars hamicon"></i> */}
       <h1 className="websiteName" onClick={goToHome}>
         Wanderly
       </h1>

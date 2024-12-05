@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./Carousel.css";
 
-const url =import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_BACKEND_URL;
 export default function Carousel({ selectedCity }) {
   const [images, setImages] = useState([
     {
       id: 0,
-      url: "/photos/AdDdOWqqcaKpAm3HOh4ZJk-n5I8J9aMtCdBEQ4qzVDlq6Sq6LtoZtAqi3FcPizVSxsz2GgzZdM5zZFhXtIVLeBqREuFlsXZtjjEYObDP429ec8Pd5x9KgCjtvL4Y6TagGTjyUJlMXlsCIPn9i4j25PibvrIAWNZblpGFqm4racK2YVUkWWWC",
-      description: "View of the location",
+      url: "",
+      description: "",
     },
   ]);
-  
+
   const [cityInfo, setCityInfo] = useState({
-    name: "MANALI",
-    description: "Default description",
-    address: ""
+    name: "",
+    description: "",
+    address: "",
   });
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -30,14 +30,14 @@ export default function Carousel({ selectedCity }) {
           setCityInfo({
             name: data.name,
             description: data.description,
-            address: data.address
+            address: data.address,
           });
 
           if (data.photos && data.photos.length > 0) {
-            const photoUrls = data.photos.map(photo => ({
+            const photoUrls = data.photos.map((photo) => ({
               id: photo.id,
               url: photo.url,
-              description: photo.description
+              description: photo.description,
             }));
             setImages(photoUrls);
           }
@@ -74,7 +74,10 @@ export default function Carousel({ selectedCity }) {
         </button>
         <div className="carousel-images">
           <img
-            src={url+images[currentIndex].url}
+            src={
+              url + images[currentIndex].url ||
+              "https://via.placeholder.com/150"
+            }
             alt="loading...."
             className="carousel-img active"
           />
