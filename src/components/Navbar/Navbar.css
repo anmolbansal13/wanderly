@@ -1,6 +1,6 @@
 .navbar {
   background-color: black;
-  height: 3.3rem;
+  height: 10vh; /* affects onTrip section ig */
   color: #ffeac5;
   display: flex;
   align-items: center;

@@ -1,17 +1,48 @@
-.onTripContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.planSection {
+  /* background-color: gray; */
+  grid-area: a;
+  display: flex;
+}
+.mapSection {
+  background-color: green;
+  grid-area: b;
+}
+.weatherSection {
+  /* background-color: bisque; */
+  grid-area: c;
+}
+.expenseSection {
+  /* background-color: aqua; */
+  grid-area: d;
+}
+.progressSection {
+  /* background-color: blueviolet; */
+  grid-area: e;
+}
+.endTripButton {
+  background-color: rgb(0, 255, 183);
+  grid-area: f;
 }
 
-.pageTitle {
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 2rem;
-}
-
-.sectionContainer {
+.gridContainer {
+  width: 100vw;
+  height: 90vh;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+  grid-template-areas:
+    "a a b b b d"
+    "a a b b b d"
+    "a a c c c d"
+    "a a c c c d"
+    "e e e e e f";
+  grid-template-rows: 4fr 4fr 4fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -82,7 +82,7 @@
   background: #0056b3;
 }
 
-.activities {
+.activities-offtrip {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -91,7 +91,7 @@
   padding: 20px;
 }
 
-.activity {
+.activity-offtrip {
   background-color: #fff;
   color: black;
   border-radius: 8px;
@@ -105,7 +105,7 @@
   margin: 5px 0;
   justify-content: space-between;
 }
-.activity button {
+.activity-offtrip button {
   padding: 5px 15px;
   border-radius: 4px;
   cursor: pointer;
@@ -114,10 +114,10 @@
   color: white;
   /* font-weight: bold; */
 }
-.activity button:hover {
+.activity-offtrip button:hover {
   background: #0056b3;
 }
-.activity-image {
+.activity-image-offtrip {
   width: 50px;
   height: 50px;
   object-fit: cover;

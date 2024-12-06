@@ -153,13 +153,13 @@ export default function OffTrip() {
           ))}
         </div>
         <h2>Plan Manager</h2>
-        <div className="activities">
+        <div className="activities-offtrip">
           {activities.map((activity) => (
-            <div className="activity" key={activity.id}>
+            <div className="activity-offtrip" key={activity.id}>
               <img
                 src={url + activity.photoUrl}
                 alt={activity.name}
-                className="activity-image"
+                className="activity-image-offtrip"
               />
               <span>{activity.name}</span>
               <button onClick={() => removeActivityFromPlan(activity)}>

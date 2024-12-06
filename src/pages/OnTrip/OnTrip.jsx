@@ -1,18 +1,47 @@
-import React from "react";
-import PlanManager from "../../components/PlanManager/PlanManager";
+import React, { useState } from "react";
+import PlanManager from "../../components/PlanManager/PlanManager.jsx";
+import Map from "../../components/Map/Map.jsx";
+import WeatherWidget from "../../components/WeatherWidget/WeatherWidget.jsx";
+import BudgetTracker from "../../components/BudgetTracker/BudgetTracker.jsx";
+import ProgressBar from "../../components/ProgressBar/ProgressBar.jsx";
 import "./OnTrip.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const OnTrip = () => {
   const { tripId } = useParams();
+  const navigate = useNavigate();
+
+  const handleEndTrip = () => {
+    if (window.confirm("Are you sure you want to end this trip?")) {
+      // Add API call to update trip status
+      navigate("/profile"); // Navigate to dashboard after ending trip
+    }
+  };
+
   return (
-    <div className="onTripContainer">
-      <h1 className="pageTitle">Your Trip Plan</h1>
-      <h2>{tripId}</h2>
-      <div className="sectionContainer">
+    <div className="gridContainer">
+      <div className="planSection">
         <PlanManager tripId={tripId} />
-        {/* Additional sections will go here */}
       </div>
+
+      <div className="mapSection">
+        <Map tripId={tripId} />
+      </div>
+
+      <div className="weatherSection">
+        <WeatherWidget tripId={tripId} />
+      </div>
+
+      <div className="expenseSection">
+        <BudgetTracker tripId={tripId} />
+      </div>
+
+      <div className="progressSection">
+        <ProgressBar tripId={tripId} />
+      </div>
+      <button className="endTripButton" onClick={handleEndTrip}>
+        End Trip
+      </button>
     </div>
   );
 };

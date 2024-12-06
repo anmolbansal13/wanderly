@@ -1,0 +1,74 @@
+.weatherWidget {
+  background-color: #f0f4f8;
+  border-radius: 10px;
+  padding: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.weatherWidget h3 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.weatherForecast {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.weatherDay {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.weatherDay:hover {
+  transform: scale(1.05);
+}
+
+.weatherDate {
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 5px;
+}
+
+.weatherIcon {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.weatherTemp {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.tempHigh {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.tempLow {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.weatherCondition {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .weatherForecast {
+    flex-direction: column;
+  }
+}

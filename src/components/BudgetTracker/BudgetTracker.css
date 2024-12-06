@@ -1,0 +1,87 @@
+.budget-tracker {
+  width: 100%;
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.budget-tracker h3 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.budget-input, .budget-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+}
+
+.budget-input input, .input-section input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-section button {
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-section button:hover {
+  background-color: #2980b9;
+}
+
+.expenses-list {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.expenses-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.remove-expense {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.total {
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  font-size: 18px;
+}

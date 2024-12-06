@@ -3,87 +3,111 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: auto;
 }
 
-.activities {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.activity {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  gap: 15px;
-}
-
-.activityImage {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.activity button {
-  margin-left: auto;
-  padding: 8px 16px;
-  background: #ff4444;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.activity button:hover {
-  background: #cc0000;
-}
-
-.headerControls {
+.header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
   gap: 10px;
 }
 
-.editButton,
-.addButton {
+.planManagerTitle{
+  color: black;
+  font-size: 2rem;
+}
+
+.editButton{
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 0;
 }
 
 .editButton {
   background: #f0f0f0;
 }
 
-.addButton {
-  background: #4caf50;
-  color: white;
-}
-
-.addButton:hover {
-  background: #45a049;
-}
-
 .editButton:hover {
   background: #e0e0e0;
 }
+.editButtons {
+  display: flex;
+  gap: 10px;
+}
 
-/* Update existing .activity button styles to use .removeButton */
-.removeButton {
-  margin-left: auto;
-  padding: 8px 16px;
-  background: #ff4444;
-  color: white;
-  border: none;
+.saveButton, .cancelButton {
+  padding: 5px 15px;
   border-radius: 4px;
   cursor: pointer;
 }
 
+.saveButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.cancelButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+.activities-ontrip {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.activity-ontrip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  gap: 15px;
+  max-width: 40%;
+  /* aspect-ratio: 1; */
+  height: auto;
+}
+
+.activityImage-ontrip {
+  width: 150px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.activities-ontrip-buttons {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.removeButton, .markDoneBtn {
+  margin-left: auto;
+  padding: 3px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: small;
+}
+.removeButton {
+  background: #ff4444;
+}
+.markDoneBtn{
+  background: rgb(98, 231, 58);
+}
 .removeButton:hover {
   background: #cc0000;
 }
