@@ -3,8 +3,14 @@ import "./PlanManager.css";
 
 const url = import.meta.env.VITE_BACKEND_URL;
 
-const PlanManager = ({ tripId }) => {
-  const [activities, setActivities] = useState([]);
+const PlanManager = ({
+  tripId,
+  completedActivities,
+  setCompletedActivities,
+  activities,
+  setActivities,
+}) => {
+  const [cityName, setCityName] = useState();
   const [originalActivities, setOriginalActivities] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -19,15 +25,38 @@ const PlanManager = ({ tripId }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+      if (!cityName) {
+        setCityName(data.tripLocation);
+      }
       setActivities(data.tripAttractions);
       setOriginalActivities(data.tripAttractions);
+      setCompletedActivities(data.completedActivities);
     } catch (error) {
       console.error("Error fetching trip details:", error);
     }
   };
   const handleSave = async () => {
-    // Add your save logic here
-    // Example: API call to update activities
+    try {
+      const response = await fetch(`${url}/editTrip/${tripId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          tripAttractions: activities,
+          completedActivities: completedActivities,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      // console.log(data);
+      fetchTripDetails();
+    } catch (error) {
+      console.error("Error marking activity as done :", error);
+    }
     setIsEditing(false);
   };
 
@@ -39,30 +68,54 @@ const PlanManager = ({ tripId }) => {
   useEffect(() => {
     fetchTripDetails();
   }, []);
-  // console.log(activities);
+
   const removeActivity = (id) => {
     setActivities(activities.filter((item) => item._id !== id));
   };
 
-  // const handleAddActivity = async () => {};
+  const [showPopup, setShowPopup] = useState(false);
+  const [availableAttractions, setAvailableAttractions] = useState([]);
+
+  const handleAddActivity = async () => {
+    setShowPopup(true);
+    try {
+      const response = await fetch(
+        `${url}/attractions?city=${encodeURIComponent(cityName)}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      // Filter out attractions that are already in activities or completedActivities
+      const filteredAttractions = data.filter(
+        (attraction) =>
+          !activities.some((act) => act.name === attraction.name) &&
+          !completedActivities.some((act) => act.name === attraction.name)
+      );
+      setAvailableAttractions(filteredAttractions);
+    } catch (error) {
+      console.error("Error fetching attractions:", error);
+    }
+  };
+
+  const toggleAttraction = (attraction) => {
+    if (activities.includes(attraction)) {
+      setActivities(activities.filter((act) => act !== attraction));
+    } else {
+      setActivities([...activities, attraction]);
+    }
+  };
+
   const handleActivityDone = async (id) => {
-    // try {
-    //   const response = await fetch(`${url}/markActivityAsDone/${id}`, {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     },
-    //   });
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    //   }
-    //   const data = await response.json();
-    //   console.log(data);
-    //   fetchTripDetails();
-    // } catch (error) {
-    //   console.error("Error marking activity as done :", error);
-    // }
+    setCompletedActivities((prev) => [
+      ...prev,
+      activities.find((item) => item._id === id),
+    ]);
+    removeActivity(id);
   };
   return (
     <div className="planManagerContainer">
@@ -85,6 +138,15 @@ const PlanManager = ({ tripId }) => {
       </div>
 
       <div className="activities-ontrip">
+        {isEditing && (
+          <div
+            className="activity-ontrip add-activity-ontrip"
+            onClick={() => handleAddActivity()}
+          >
+            <h2>+</h2>
+            <p>Add More</p>
+          </div>
+        )}
         {activities.map((activity) => (
           <div className="activity-ontrip" key={activity._id}>
             {!isEditing && (
@@ -116,6 +178,28 @@ const PlanManager = ({ tripId }) => {
           </div>
         ))}
       </div>
+      {showPopup && (
+        <>
+          <div className="popup-overlay" onClick={() => setShowPopup(false)} />
+          <div className="popup-container">
+            <div className="attractions-grid">
+              {availableAttractions.map((attraction) => (
+                <div key={attraction._id} className="attraction-item">
+                  <span>{attraction.name}</span>
+                  <button
+                    className={`add-remove-btn ${
+                      activities.includes(attraction) ? "remove-btn" : "add-btn"
+                    }`}
+                    onClick={() => toggleAttraction(attraction)}
+                  >
+                    {activities.includes(attraction) ? "Remove" : "Add"}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -10,6 +10,8 @@ import { useParams, useNavigate } from "react-router-dom";
 const OnTrip = () => {
   const { tripId } = useParams();
   const navigate = useNavigate();
+  const [completedActivities, setCompletedActivities] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   const handleEndTrip = () => {
     if (window.confirm("Are you sure you want to end this trip?")) {
@@ -21,7 +23,13 @@ const OnTrip = () => {
   return (
     <div className="gridContainer">
       <div className="planSection">
-        <PlanManager tripId={tripId} />
+        <PlanManager
+          tripId={tripId}
+          completedActivities={completedActivities}
+          setCompletedActivities={setCompletedActivities}
+          activities={activities}
+          setActivities={setActivities}
+        />
       </div>
 
       <div className="mapSection">
@@ -37,7 +45,11 @@ const OnTrip = () => {
       </div>
 
       <div className="progressSection">
-        <ProgressBar tripId={tripId} />
+        <ProgressBar
+          tripId={tripId}
+          completedActivities={completedActivities}
+          activities={activities}
+        />
       </div>
       <button className="endTripButton" onClick={handleEndTrip}>
         End Trip
