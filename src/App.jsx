@@ -44,7 +44,7 @@ function App() {
           }
         />
         <Route path="/offtrip/:cityName" element={<OffTrip />} />
-        <Route path="/ontrip" element={<OnTrip />} />
+        <Route path="/ontrip/:tripId" element={<OnTrip />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./Profile.css";
 import {
   Chart as ChartJS,
@@ -23,6 +24,7 @@ ChartJS.register(
 const url = import.meta.env.VITE_BACKEND_URL;
 
 export default function Profile() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -104,6 +106,29 @@ export default function Profile() {
     }
   };
 
+  const handleStartTrip = async (tripId) => {
+    try {
+      const res = await fetch(`${url}/startExistingTrip/${tripId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (res.status === 200) {
+        alert("Trip started successfully 😎");
+        navigate(`/onTrip/${encodeURIComponent(tripId)}`);
+        return;
+      }
+      alert(`Error starting trip: ${data.message}`);
+      console.log(data);
+    } catch (error) {
+      alert(`Error starting trip: ${error.message}`);
+      console.log(error);
+    }
+  };
+
   useState(async () => {
     const res = await fetch(`${url}/getTrips`, {
       method: "GET",
@@ -177,8 +202,15 @@ export default function Profile() {
                       <h3>{trip.destination}</h3>
                       <p>Date: {trip.date}</p>
                       <p>Estimated Cost: ₹{trip.estimatedCost}</p>
-                      <button className="trip-action-btn">Start Trip</button>
-                      <button className="trip-action-btn trip-remove-btn">Cancel Plan</button>
+                      <button
+                        className="trip-action-btn"
+                        onClick={() => handleStartTrip(trip.id)}
+                      >
+                        Start Trip
+                      </button>
+                      <button className="trip-action-btn trip-remove-btn">
+                        Cancel Plan
+                      </button>
                     </div>
                   ))
               ) : (

@@ -1,0 +1,89 @@
+.planManagerContainer {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.activities {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  gap: 15px;
+}
+
+.activityImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.activity button {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.activity button:hover {
+  background: #cc0000;
+}
+
+.headerControls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.editButton,
+.addButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editButton {
+  background: #f0f0f0;
+}
+
+.addButton {
+  background: #4caf50;
+  color: white;
+}
+
+.addButton:hover {
+  background: #45a049;
+}
+
+.editButton:hover {
+  background: #e0e0e0;
+}
+
+/* Update existing .activity button styles to use .removeButton */
+.removeButton {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background: #cc0000;
+}

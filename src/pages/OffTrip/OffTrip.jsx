@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./OffTrip.css";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 
 const url = import.meta.env.VITE_BACKEND_URL;
 export default function OffTrip() {
+  const navigate = useNavigate();
   const { cityName } = useParams();
 
   const [attractions, setAttractions] = useState([]);
@@ -117,7 +118,10 @@ export default function OffTrip() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      // console.log("Trip saved successfully:", data);
+      const tripId = data._id;
+      navigate(`/ontrip/${encodeURIComponent(tripId)}`);
+
+      console.log("Trip started successfully:", data);
     } catch (error) {
       console.error("Error saving trip:", error);
       alert("Failed to save trip. Please try again.");
