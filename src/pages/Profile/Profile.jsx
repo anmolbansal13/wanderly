@@ -138,6 +138,7 @@ export default function Profile() {
       },
     });
     const data = await res.json();
+    console.log(data);
     const transformedTrips = {
       saved: data.saved.map((trip) => ({
         id: trip._id,
@@ -171,7 +172,16 @@ export default function Profile() {
           <div className="stat-box">
             <h3>Total Spent</h3>
             <p>
-              ₹{trips.completed.reduce((sum, trip) => sum + trip.actualCost, 0)}
+              ₹
+              {trips.completed.reduce(
+                (sum, trip) =>
+                  sum +
+                  trip.actualCost.reduce(
+                    (total, expense) => total + expense.cost,
+                    0
+                  ),
+                0
+              )}
             </p>
           </div>
         </div>
@@ -233,15 +243,23 @@ export default function Profile() {
           </div>
           {showCompletedTrips && (
             <div className="completed-trips">
+              {/* {console.log(trips)} */}
               {trips.completed.length > 0 ? (
                 trips.completed
                   .sort((a, b) => new Date(b.date) - new Date(a.date))
                   .slice(0, 5)
                   .map((trip) => (
                     <div key={trip.id} className="trip-card">
+                      {console.log(trip)}
                       <h3>{trip.destination}</h3>
                       <p>Date: {trip.date}</p>
-                      <p>Actual Cost: ₹{trip.actualCost}</p>
+                      <p>
+                        Actual Cost: ₹
+                        {trip.actualCost.reduce(
+                          (total, expense) => total + expense.cost,
+                          0
+                        )}
+                      </p>
                       <button className="trip-action-btn">View Details</button>
                     </div>
                   ))

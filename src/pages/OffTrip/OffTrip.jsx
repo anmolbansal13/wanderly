@@ -11,7 +11,7 @@ export default function OffTrip() {
   const [activities, setActivities] = useState([]);
 
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState([]);
   const [visibleAttractions, setVisibleAttractions] = useState([]);
 
   // Fetch attractions from your API
@@ -78,7 +78,8 @@ export default function OffTrip() {
         body: JSON.stringify({
           tripLocation: cityName,
           tripStartDate: date,
-          tripBudget: budget,
+          estimatedBudget: budget,
+          tripBudget: [],
           tripAttractions: activities.map((activity) => ({
             name: activity.name,
             photoUrl: activity.photoUrl,
@@ -107,7 +108,7 @@ export default function OffTrip() {
         },
         body: JSON.stringify({
           tripLocation: cityName,
-          tripBudget: budget,
+          tripBudget: [],
           tripAttractions: activities.map((activity) => ({
             name: activity.name,
             photoUrl: activity.photoUrl,
