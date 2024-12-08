@@ -39,7 +39,6 @@ export default function Profile() {
   const [showSavedTrips, setShowSavedTrips] = useState(false);
   const [showCompletedTrips, setShowCompletedTrips] = useState(false);
 
-  // Replace the existing chartData with this configuration
   const chartData = {
     labels: trips.completed.map((trip) => `${trip.destination}`),
     datasets: [
@@ -138,19 +137,22 @@ export default function Profile() {
       },
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     const transformedTrips = {
       saved: data.saved.map((trip) => ({
         id: trip._id,
         destination: trip.tripLocation,
         date: new Date(trip.tripStartDate).toISOString().split("T")[0],
-        estimatedCost: trip.tripBudget,
+        estimatedCost: trip.estimatedBudget,
       })),
       completed: data.completed.map((trip) => ({
         id: trip._id,
         destination: trip.tripLocation,
         date: new Date(trip.tripStartDate).toISOString().split("T")[0],
-        actualCost: trip.tripBudget,
+        actualCost: trip.tripBudget.reduce(
+          (total, expense) => total + expense.cost,
+          0
+        ),
       })),
     };
     setTrips(transformedTrips);
@@ -172,16 +174,7 @@ export default function Profile() {
           <div className="stat-box">
             <h3>Total Spent</h3>
             <p>
-              ₹
-              {trips.completed.reduce(
-                (sum, trip) =>
-                  sum +
-                  trip.actualCost.reduce(
-                    (total, expense) => total + expense.cost,
-                    0
-                  ),
-                0
-              )}
+              ₹{trips.completed.reduce((sum, trip) => sum + trip.actualCost, 0)}
             </p>
           </div>
         </div>
@@ -253,13 +246,7 @@ export default function Profile() {
                       {console.log(trip)}
                       <h3>{trip.destination}</h3>
                       <p>Date: {trip.date}</p>
-                      <p>
-                        Actual Cost: ₹
-                        {trip.actualCost.reduce(
-                          (total, expense) => total + expense.cost,
-                          0
-                        )}
-                      </p>
+                      <p>Actual Cost: ₹{trip.actualCost}</p>
                       <button className="trip-action-btn">View Details</button>
                     </div>
                   ))

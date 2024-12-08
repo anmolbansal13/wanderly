@@ -11,7 +11,7 @@ export default function OffTrip() {
   const [activities, setActivities] = useState([]);
 
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [budget, setBudget] = useState([]);
+  const [budget, setBudget] = useState();
   const [visibleAttractions, setVisibleAttractions] = useState([]);
 
   // Fetch attractions from your API
@@ -29,7 +29,7 @@ export default function OffTrip() {
       );
       const data = await response.json();
       setAttractions(data);
-      setVisibleAttractions(data.slice(0, 5)); // Show first 5 items
+      setVisibleAttractions(data.slice(0, 4)); // Show first 4 items
     } catch (error) {
       console.error("Error fetching attractions:", error);
     }
@@ -62,7 +62,7 @@ export default function OffTrip() {
     setAttractions(updatedAttractions);
 
     // Add the removed item back to visible attractions if there's space
-    if (visibleAttractions.length < 5) {
+    if (visibleAttractions.length < 4) {
       setVisibleAttractions([...visibleAttractions, activity]);
     }
   };
@@ -78,7 +78,7 @@ export default function OffTrip() {
         body: JSON.stringify({
           tripLocation: cityName,
           tripStartDate: date,
-          estimatedBudget: budget,
+          estimatedBudget: (budget || 0),
           tripBudget: [],
           tripAttractions: activities.map((activity) => ({
             name: activity.name,

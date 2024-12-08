@@ -29,7 +29,7 @@ function App() {
             },
           });
           const data = await response.json();
-          console.log(data.tripId);
+          // console.log(data.tripId);
           setUserTripStatus(data);
           // If user is on trip, redirect to ontrip page
           if (data.onTrip && data.tripId && window.location.pathname === "/") {

@@ -1,3 +1,10 @@
+.isTripEnded{
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
 .planSection {
   /* background-color: gray; */
   grid-area: a;
