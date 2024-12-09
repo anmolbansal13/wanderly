@@ -6,7 +6,7 @@
   border-radius: 12px;
   background-color: #f4f4f4;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .budget-tracker h3 {
@@ -16,7 +16,8 @@
   font-size: 1.5em;
 }
 
-.budget-input, .budget-summary {
+.budget-input,
+.budget-summary {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
@@ -25,7 +26,8 @@
   border-radius: 8px;
 }
 
-.budget-input input, .input-section input {
+.budget-input input,
+.input-section input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;

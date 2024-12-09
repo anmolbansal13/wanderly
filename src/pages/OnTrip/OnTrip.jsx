@@ -14,6 +14,7 @@ const OnTrip = () => {
   const [completedActivities, setCompletedActivities] = useState([]);
   const [activities, setActivities] = useState([]);
   const [tripEnded, setTripEnded] = useState(false);
+
   const handleEndTrip = async () => {
     if (window.confirm("Are you sure you want to end this trip?")) {
       // Add API call to update trip status
@@ -49,7 +50,7 @@ const OnTrip = () => {
         if (response.ok) {
           const data = await response.json();
           setTripEnded(data.tripComplete);
-          console.log(data);
+          // console.log(data);
         } else {
           console.error("Failed to fetch trip status");
         }
@@ -65,7 +66,7 @@ const OnTrip = () => {
       {tripEnded ? (
         <div className="isTripEnded">You have ended this trip</div>
       ) : (
-        <div className="gridContainer">
+        <div className="gridContainer font-serif">
           <>
             <div className="planSection">
               <PlanManager

@@ -78,11 +78,12 @@ export default function OffTrip() {
         body: JSON.stringify({
           tripLocation: cityName,
           tripStartDate: date,
-          estimatedBudget: (budget || 0),
+          estimatedBudget: budget || 0,
           tripBudget: [],
           tripAttractions: activities.map((activity) => ({
             name: activity.name,
             photoUrl: activity.photoUrl,
+            formatted_address: activity.formatted_address,
           })),
         }),
       });
@@ -112,6 +113,7 @@ export default function OffTrip() {
           tripAttractions: activities.map((activity) => ({
             name: activity.name,
             photoUrl: activity.photoUrl,
+            formatted_address: activity.formatted_address,
           })),
         }),
       });

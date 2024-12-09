@@ -1,4 +1,4 @@
-.isTripEnded{
+.isTripEnded {
   font-size: 4rem;
   display: flex;
   align-items: center;
@@ -17,6 +17,7 @@
 .weatherSection {
   /* background-color: bisque; */
   grid-area: c;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 .expenseSection {
   /* background-color: aqua; */
