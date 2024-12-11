@@ -1,5 +1,4 @@
 .weatherWidget {
-  background: linear-gradient(91deg, #3498db, #0d5484);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -7,11 +6,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 1.4rem;
+  padding-right: 0.5rem;
   color: white;
-
   font-weight: 100 !important;
+  transition: background 0.3s ease; /* Smooth transition between weather states */
 }
 
 .condition-section {
@@ -35,4 +34,21 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.weather-icon {
+  margin-left: 8px;
+  font-size: 1.1em;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
 }

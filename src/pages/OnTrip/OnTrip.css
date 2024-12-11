@@ -11,11 +11,13 @@
   display: flex;
 }
 .mapSection {
-  background-color: green;
+  /* background-color: green; */
   grid-area: b;
+  margin-top: 1rem;
 }
 .weatherSection {
   /* background-color: bisque; */
+  margin-top: 1rem;
   grid-area: c;
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
@@ -39,7 +41,7 @@
   grid-template-areas:
     "a a b b b d"
     "a a b b b d"
-    "a a c c c d"
+    "a a b b b d"
     "a a c c c d"
     "e e e e e f";
   grid-template-rows: 4fr 4fr 4fr 2fr 1fr;

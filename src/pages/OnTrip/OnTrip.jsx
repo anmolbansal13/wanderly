@@ -79,7 +79,7 @@ const OnTrip = () => {
             </div>
 
             <div className="mapSection">
-              <Map tripId={tripId} />
+              <Map activities={activities} />
             </div>
 
             <div className="weatherSection">
