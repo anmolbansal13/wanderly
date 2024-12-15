@@ -83,7 +83,7 @@ const OnTrip = () => {
             </div>
 
             <div className="weatherSection">
-              {/* <WeatherWidget tripId={tripId} /> */}
+              <WeatherWidget tripId={tripId} />
             </div>
 
             <div className="expenseSection">

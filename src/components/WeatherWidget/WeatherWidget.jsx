@@ -81,15 +81,15 @@ const WeatherWidget = ({ tripId }) => {
         const data = await response.json();
         console.log("Weather data received:", data);
         setWeatherData(data);
+        setLoading(false);
       } catch (err) {
         console.log("Weather fetch error:", err);
         setError("Could not fetch weather data");
-      } finally {
-        setLoading(false); // Set loading false whether success or error
       }
     };
 
     fetchWeatherData();
+    // Set loading to false after fetch
   }, [cityName]);
 
   if (loading) return <div className="weatherWidget">Loading weather...</div>;
