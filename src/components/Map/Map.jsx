@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Map.css";
 
+const mapKey = import.meta.env.VITE_PUBLIC_MAPS_GOOGLE_API_KEY;
 const Map = ({ activities }) => {
   const url = import.meta.env.VITE_BACKEND_URL;
   const [polylineData, setPolylineData] = useState(null);
@@ -125,9 +126,7 @@ const Map = ({ activities }) => {
     };
 
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${
-      import.meta.env.VITE_PUBLIC_MAPS_GOOGLE_API_KEY
-    }&libraries=geometry&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapKey}&libraries=geometry&callback=initMap`;
     script.async = true;
     script.defer = true;
     if (!document.querySelector(`script[src="${script.src}"]`)) {
