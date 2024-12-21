@@ -1,0 +1,27 @@
+.trip-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000000;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease-in-out;
+}
+
+.trip-popup-container {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 400px;
+  max-width: 75vw;
+  box-shadow: 0 10px 25px rgba(96, 63, 38, 0.2);
+  text-align: center;
+  color: black;
+  transform: translateY(0);
+  animation: popIn 0.5s ease-out;
+}

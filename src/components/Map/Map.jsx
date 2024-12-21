@@ -126,7 +126,7 @@ const Map = ({ activities }) => {
     };
 
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapKey}&libraries=geometry&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapKey}&libraries=geometry&callback=initMap&loading=async`;
     script.async = true;
     script.defer = true;
     if (!document.querySelector(`script[src="${script.src}"]`)) {

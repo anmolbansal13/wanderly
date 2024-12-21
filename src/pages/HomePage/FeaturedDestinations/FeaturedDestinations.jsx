@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import Card from "./Card/Card";
 import "./FeaturedDestinations.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const destinations = [
   {
     id: 1,
-    name: "Taj Mahal, Agra",
-    image: "https://images.unsplash.com/photo-1564507592333-c60657eea523",
+    name: "Manali, Himachal Pradesh, India",
+    image:
+      "https://www.indiadrivertours.com/wp-content/uploads/2017/06/tpkg-manalitour.jpg",
     rating: 4.8,
-    distance: "215 km",
     description:
       "One of the seven wonders of the world, symbol of eternal love",
   },
   {
     id: 2,
-    name: "Jaipur Pink City",
+    name: "Jaipur, Rajasthan, India",
     image: "https://images.unsplash.com/photo-1477587458883-47145ed94245",
     rating: 4.6,
     distance: "150 km",
@@ -22,40 +23,44 @@ const destinations = [
   },
   {
     id: 3,
-    name: "Goa Beaches",
-    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2",
+    name: "Delhi, India",
+    image: "https://exploreio.in/wp-content/uploads/2024/01/202664.jpg",
     rating: 4.7,
     distance: "400 km",
-    description: "Pristine beaches, nightlife and Portuguese influence",
+    description: "Pollution at its peak, but a must-visit for history buffs",
   },
   {
     id: 4,
-    name: "Varanasi Ghats",
-    image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc",
+    name: "Leh",
+    image:
+      "https://backpackersunited.in/_next/image?url=https%3A%2F%2Fbpu-images-v1.s3.eu-north-1.amazonaws.com%2Fuploads%2Ftestimage-pexels-anjali-vishwakarma-14477905.jpg&w=3840&q=75",
     rating: 4.5,
     distance: "320 km",
     description: "Spiritual capital of India, ancient temples and holy Ganges",
   },
   {
     id: 5,
-    name: "Kerala Backwaters",
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944",
+    name: "Spiti, Himachal Pradesh, India",
+    image:
+      "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2023/12/13/b9e1b5bbf87f3ec75c09613f9378b564_1000x1000.jpg",
     rating: 4.9,
     distance: "890 km",
     description: "Serene waterways, houseboats and lush greenery",
   },
   {
     id: 6,
-    name: "Udaipur Lakes",
-    image: "https://images.unsplash.com/photo-1590766940554-153a4d9afce0",
+    name: "Darjeeling, West Bengal, India",
+    image:
+      "https://sikkimtourism.org/wp-content/uploads/2022/06/darjeeling.jpg",
     rating: 4.7,
     distance: "250 km",
     description: "City of lakes, royal palaces and romantic settings",
   },
 ];
 
-export default function FeaturedDestinations() {
+export default function FeaturedDestinations({ isLoggedIn, setLoginPopup }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const isAtStart = currentIndex === 0;
   const isAtEnd = currentIndex + 2 >= destinations.length;
@@ -71,16 +76,29 @@ export default function FeaturedDestinations() {
       prevIndex - 2 < 0 ? destinations.length - 1 : prevIndex - 2
     );
   };
+  const handleStartTrip = async (destinationName) => {
+    if (isLoggedIn) {
+      await navigate(`/offtrip/${encodeURIComponent(destinationName)}`);
+    } else {
+      setLoginPopup(`/offtrip/${encodeURIComponent(destinationName)}`);
+    }
+  };
 
   return (
     <div className="featured-container">
       <h2>Featured Destinations</h2>
       <div className="cards-list">
         <Card
+          onclickthebutton={() =>
+            handleStartTrip(destinations[currentIndex].name)
+          }
           key={destinations.find((_, index) => index === currentIndex).id}
           destination={destinations.find((_, index) => index === currentIndex)}
         />
         <Card
+          onclickthebutton={() =>
+            handleStartTrip(destinations[currentIndex + 1].name)
+          }
           key={destinations.find((_, index) => index === currentIndex + 1).id}
           destination={destinations.find(
             (_, index) => index === currentIndex + 1

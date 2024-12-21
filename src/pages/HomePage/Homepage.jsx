@@ -10,7 +10,10 @@ export default function Homepage({ isLoggedIn, setLoginPopup }) {
         isLoggedIn={isLoggedIn}
         setLoginPopup={setLoginPopup}
       />
-      <FeaturedDestinations />
+      <FeaturedDestinations
+        isLoggedIn={isLoggedIn}
+        setLoginPopup={setLoginPopup}
+      />
     </div>
   );
 }

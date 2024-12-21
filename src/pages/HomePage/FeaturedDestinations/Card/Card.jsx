@@ -1,9 +1,9 @@
-import React from 'react'
-import './Card.css'
+import React from "react";
+import "./Card.css";
 
-export default function Card({ destination }) {
+export default function Card({ destination, onclickthebutton }) {
   return (
-    <div className="destination-card">
+    <div className="destination-card" onClick={onclickthebutton}>
       <div className="card-image">
         <img src={destination.image} alt={destination.name} />
         {/* <span className="distance">{destination.distance}</span> */}
@@ -19,5 +19,5 @@ export default function Card({ destination }) {
         <p className="card-description">{destination.description}</p>
       </div>
     </div>
-  )
+  );
 }

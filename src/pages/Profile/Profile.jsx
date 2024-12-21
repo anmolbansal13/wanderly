@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import TripDetails from "../../components/TripDetails/TripDetails";
 
 ChartJS.register(
   CategoryScale,
@@ -32,6 +33,7 @@ export default function Profile() {
     oldPassword: "",
   });
 
+  const [isPopupOpen, setIsPopupOpen] = useState({});
   const [trips, setTrips] = useState({
     saved: [],
     completed: [],
@@ -128,6 +130,14 @@ export default function Profile() {
     }
   };
 
+  const handleViewDetails = (tripId) => {
+    setIsPopupOpen((prev) => ({ ...prev, [tripId]: true }));
+  };
+
+  const handleClosePopup = (tripId) => {
+    setIsPopupOpen((prev) => ({ ...prev, [tripId]: false }));
+  };
+
   useState(async () => {
     const res = await fetch(`${url}/getTrips`, {
       method: "GET",
@@ -155,6 +165,8 @@ export default function Profile() {
         ),
       })),
     };
+    console.log(transformedTrips);
+    // console.log(isPopupOpen);
     setTrips(transformedTrips);
   }, []);
 
@@ -242,13 +254,25 @@ export default function Profile() {
                   .sort((a, b) => new Date(b.date) - new Date(a.date))
                   .slice(0, 5)
                   .map((trip) => (
-                    <div key={trip.id} className="trip-card">
-                      {console.log(trip)}
-                      <h3>{trip.destination}</h3>
-                      <p>Date: {trip.date}</p>
-                      <p>Actual Cost: ₹{trip.actualCost}</p>
-                      <button className="trip-action-btn">View Details</button>
-                    </div>
+                    <>
+                      <div key={trip.id} className="trip-card">
+                        {console.log(trip)}
+                        <h3>{trip.destination}</h3>
+                        <p>Date: {trip.date}</p>
+                        <p>Actual Cost: ₹{trip.actualCost}</p>
+                        <button
+                          className="trip-action-btn"
+                          onClick={() => handleViewDetails(trip.id)}
+                        >
+                          View Details
+                        </button>
+                      </div>
+                      <TripDetails
+                        tripId={trip.id}
+                        isOpen={isPopupOpen[trip.id]}
+                        onClose={() => handleClosePopup(trip.id)}
+                      />
+                    </>
                   ))
               ) : (
                 <p>You have no completed trips</p>

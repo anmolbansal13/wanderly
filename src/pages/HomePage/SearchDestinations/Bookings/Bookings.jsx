@@ -29,6 +29,8 @@ const Bookings = ({
 
   const handleStartTrip = async () => {
     if (isCitySelected && isLoggedIn) {
+      console.log(cityName);
+      console.log(`/offtrip/${encodeURIComponent(cityName)}`);
       await navigate(`/offtrip/${encodeURIComponent(cityName)}`);
     }
     if (isCitySelected && !isLoggedIn) {
