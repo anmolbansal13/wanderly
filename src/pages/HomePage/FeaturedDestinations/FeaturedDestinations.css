@@ -1,5 +1,5 @@
 .featured-container {
-  min-width: 25%;
+  /* min-width: 25%; */
   padding: 1rem;
   background-color: white;
   border-radius: 1rem;
@@ -14,8 +14,13 @@
   width: auto;
   z-index: 1;
   position: relative;
+  width: 350px;
 }
-
+@media (max-width: 768px) {
+  .featured-container {
+    width: 50%;
+  }
+}
 .featured-container > h2 {
   color: #603f26;
   font-weight: bold;
@@ -30,6 +35,7 @@
 /* Cards and Carousel */
 .cards-list {
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 1rem;
   transition: transform 0.5s ease-in-out;
@@ -41,6 +47,7 @@
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  width: 80%;
 }
 
 .destination-card:hover {

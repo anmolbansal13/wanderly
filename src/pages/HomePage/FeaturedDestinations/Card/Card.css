@@ -14,7 +14,8 @@
 }
 
 .card-image {
-  height: 99px;
+  height: 100px;
+  /* aspect-ratio: 16/7; */
   overflow: hidden;
 }
 
@@ -53,21 +54,6 @@
 .reviews {
   color: #666;
   font-size: 0.9rem;
-}
-
-.view-details {
-  width: 100%;
-  padding: 0.8rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.view-details:hover {
-  background: #0056b3;
 }
 
 .carousel-container {
@@ -148,6 +134,7 @@
 .card-description {
   font-size: 0.65rem;
   color: #666;
+  /* text-overflow: ellipsis; */
 }
 
 .distance {

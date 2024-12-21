@@ -9,52 +9,49 @@ const destinations = [
     name: "Manali, Himachal Pradesh, India",
     image:
       "https://www.indiadrivertours.com/wp-content/uploads/2017/06/tpkg-manalitour.jpg",
-    rating: 4.8,
+    rating: 4.3,
     description:
-      "One of the seven wonders of the world, symbol of eternal love",
+      "Manali is a hill station in the Kullu, known for its snow-capped mountains and picturesque landscapes.",
   },
   {
     id: 2,
     name: "Jaipur, Rajasthan, India",
     image: "https://images.unsplash.com/photo-1477587458883-47145ed94245",
-    rating: 4.6,
-    distance: "150 km",
-    description: "Royal palaces, vibrant culture and historic architecture",
+    rating: 4.2,
+    description:
+      "Jaipur is a popular tourist destination known for its beauty, history, and architecture",
   },
   {
     id: 3,
     name: "Delhi, India",
     image: "https://exploreio.in/wp-content/uploads/2024/01/202664.jpg",
-    rating: 4.7,
-    distance: "400 km",
-    description: "Pollution at its peak, but a must-visit for history buffs",
+    rating: 3.8,
+    description:
+      "Delhi is a symbol of its rich cultural past and thriving present, a city most cherished and visited by all.",
   },
   {
     id: 4,
     name: "Leh",
     image:
-      "https://backpackersunited.in/_next/image?url=https%3A%2F%2Fbpu-images-v1.s3.eu-north-1.amazonaws.com%2Fuploads%2Ftestimage-pexels-anjali-vishwakarma-14477905.jpg&w=3840&q=75",
-    rating: 4.5,
-    distance: "320 km",
-    description: "Spiritual capital of India, ancient temples and holy Ganges",
+      "https://www.remotelands.com/storage/media/4183/conversions/b160729204-banner-size.jpg",
+    rating: 4.2,
+    description: " Barren mountains with brightly painted monasteries, fluttering prayer flags, rocky ridges, and tiny settlements add to the overall charm of the region.",
   },
   {
     id: 5,
     name: "Spiti, Himachal Pradesh, India",
     image:
       "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2023/12/13/b9e1b5bbf87f3ec75c09613f9378b564_1000x1000.jpg",
-    rating: 4.9,
-    distance: "890 km",
-    description: "Serene waterways, houseboats and lush greenery",
+    rating: 4.8,
+    description: "This majestic cold desert valley is replete with pine forests, green meadows and beautiful monasteries will leave you totally awe-stuck",
   },
   {
     id: 6,
     name: "Darjeeling, West Bengal, India",
     image:
       "https://sikkimtourism.org/wp-content/uploads/2022/06/darjeeling.jpg",
-    rating: 4.7,
-    distance: "250 km",
-    description: "City of lakes, royal palaces and romantic settings",
+    rating: 4.1,
+    description: "Darjeeling is famous throughout the world for the tea it grows and the great view of the Kanchenjunga range of mountains that it offers",
   },
 ];
 

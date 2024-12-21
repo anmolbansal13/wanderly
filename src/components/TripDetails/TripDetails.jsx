@@ -18,7 +18,7 @@ function TripDetails({ tripId, isOpen, onClose }) {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          // console.log(data);
           setTripDetails(data);
         } else {
           console.error("Failed to fetch trip details");
@@ -49,12 +49,17 @@ function TripDetails({ tripId, isOpen, onClose }) {
   }
 
   const fomattedDate = (date) => {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = String(date.getFullYear()).slice(-2);
-    console.log(day, month, year);
+    date = new Date(date);
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const year = date.getUTCFullYear();
 
     return `${day}-${month}-${year}`;
+  };
+  const getBudget = (budgetArray) => {
+    if(budgetArray.length===0) return "You did not add anything in your trip budget";
+    const budget = budgetArray.reduce((total, expense) => total + expense.cost, 0);
+    return budget;
   };
   return (
     <div className="trip-popup-overlay">
@@ -62,8 +67,8 @@ function TripDetails({ tripId, isOpen, onClose }) {
         <h2>Trip Details</h2>
         <p>Trip Location: {tripDetails?.tripLocation}</p>
         <p>Trip Start Date: {fomattedDate(tripDetails?.tripStartDate)}</p>
-        <p>Trip End Date: {tripDetails?.tripCompletedDate}</p>
-        <p>Trip Budget: {tripDetails?.actualBudget}</p>
+        <p>Trip End Date: {fomattedDate(tripDetails?.tripCompletedDate)}</p>
+        <p>Trip Budget: {getBudget(tripDetails?.tripBudget)}</p>
       </div>
     </div>
   );

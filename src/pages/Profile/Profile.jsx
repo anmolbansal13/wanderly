@@ -165,7 +165,7 @@ export default function Profile() {
         ),
       })),
     };
-    console.log(transformedTrips);
+    // console.log(transformedTrips);
     // console.log(isPopupOpen);
     setTrips(transformedTrips);
   }, []);
@@ -175,6 +175,15 @@ export default function Profile() {
       <div className="profile-header">
         <h1>My Profile</h1>
         <div className="profile-stats">
+          {(
+            <div
+              className="stat-box"
+              onClick={() => navigate(`/`)}
+            >
+              <h3>Current Trip</h3>
+              <p>{}</p>
+            </div>
+          )}
           <div className="stat-box">
             <h3>Saved Trips</h3>
             <p>{trips.saved.length}</p>
@@ -203,7 +212,7 @@ export default function Profile() {
                 setShowCompletedTrips(false);
               }}
             >
-              {showSavedTrips ? "▼" : "▶"}
+              {showSavedTrips ? "▼" : "▷"}
             </button>
           </div>
           {showSavedTrips && (
@@ -243,7 +252,7 @@ export default function Profile() {
                 setShowSavedTrips(false);
               }}
             >
-              {showCompletedTrips ? "▼" : "▶"}
+              {showCompletedTrips ? "▼" : "▷"}
             </button>
           </div>
           {showCompletedTrips && (
@@ -256,7 +265,7 @@ export default function Profile() {
                   .map((trip) => (
                     <>
                       <div key={trip.id} className="trip-card">
-                        {console.log(trip)}
+                        {/*console.log(trip)*/}
                         <h3>{trip.destination}</h3>
                         <p>Date: {trip.date}</p>
                         <p>Actual Cost: ₹{trip.actualCost}</p>

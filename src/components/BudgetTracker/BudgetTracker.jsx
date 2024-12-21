@@ -83,7 +83,7 @@ const BudgetTracker = ({ tripId }) => {
       </div> */}
 
       <div className="budget-summary">
-        <div>Total Expenses: ${budget.toFixed(2)}</div>
+        <div>Total Expenses: ₹{budget.toFixed(2)}</div>
       </div>
 
       <div className="input-section">
@@ -117,9 +117,9 @@ const BudgetTracker = ({ tripId }) => {
         ))}
       </ul> */}
 
-      <div className="total">
-        <strong>Total Expenses:</strong> ${totalExpenses.toFixed(2)}
-      </div>
+      {/* <div className="total">
+        <strong>Total Expenses:</strong> ₹{totalExpenses.toFixed(2)}
+      </div> */}
     </div>
   );
 };
