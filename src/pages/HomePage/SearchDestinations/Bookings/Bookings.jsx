@@ -82,7 +82,7 @@ const Bookings = ({
     <div className="bookings-container">
       <h1 className="bookings-title">Bookings</h1>
       <div className="booking-options">
-        <div className="booking-card" onClick={handleSearchFlights}>
+        {/* <div className="booking-card" onClick={handleSearchFlights}>
           <div className="booking-icon">{"✈️"}</div>
           <h2 className="booking-name">
             Flights starting ₹ {price ? price + "/-" : "....."}
@@ -95,7 +95,7 @@ const Bookings = ({
         <div className="booking-card">
           <div className="booking-icon">{"🚍"}</div>
           <h2 className="booking-name">{"Bus/Cabs"}</h2>
-        </div>
+        </div> */}
         <div
           className="booking-card"
           disabled={isCitySelected}

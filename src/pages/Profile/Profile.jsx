@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./Profile.css";
@@ -34,6 +34,7 @@ export default function Profile() {
   });
 
   const [isPopupOpen, setIsPopupOpen] = useState({});
+  const [onTrip, setOnTrip] = useState(false);
   const [trips, setTrips] = useState({
     saved: [],
     completed: [],
@@ -81,6 +82,26 @@ export default function Profile() {
       },
     },
   };
+
+  const getUserStatus = async () => {
+    try {
+      const response = await fetch(`${url}/userGetTripStatus`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      setOnTrip(data.onTrip);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserStatus();
+  }, []);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -138,7 +159,27 @@ export default function Profile() {
     setIsPopupOpen((prev) => ({ ...prev, [tripId]: false }));
   };
 
-  useState(async () => {
+  const handleRemoveTrip = async (tripId) => {
+    try {
+      const res = await fetch(`${url}/deleteTrip/${tripId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (res.status === 200) {
+        alert("Trip deleted successfully 😎");
+        getTrips();
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getTrips = async () => {
     const res = await fetch(`${url}/getTrips`, {
       method: "GET",
       headers: {
@@ -147,7 +188,6 @@ export default function Profile() {
       },
     });
     const data = await res.json();
-    // console.log(data);
     const transformedTrips = {
       saved: data.saved.map((trip) => ({
         id: trip._id,
@@ -165,9 +205,11 @@ export default function Profile() {
         ),
       })),
     };
-    // console.log(transformedTrips);
-    // console.log(isPopupOpen);
     setTrips(transformedTrips);
+  };
+
+  useEffect(() => {
+    getTrips();
   }, []);
 
   return (
@@ -175,11 +217,8 @@ export default function Profile() {
       <div className="profile-header">
         <h1>My Profile</h1>
         <div className="profile-stats">
-          {(
-            <div
-              className="stat-box"
-              onClick={() => navigate(`/`)}
-            >
+          {onTrip && (
+            <div className="stat-box" onClick={() => navigate(`/`)}>
               <h3>Current Trip</h3>
               <p>{}</p>
             </div>
@@ -226,13 +265,18 @@ export default function Profile() {
                       <h3>{trip.destination}</h3>
                       <p>Date: {trip.date}</p>
                       <p>Estimated Cost: ₹{trip.estimatedCost}</p>
+                      {!onTrip && (
+                        <button
+                          className="trip-action-btn"
+                          onClick={() => handleStartTrip(trip.id)}
+                        >
+                          Start Trip
+                        </button>
+                      )}
                       <button
-                        className="trip-action-btn"
-                        onClick={() => handleStartTrip(trip.id)}
+                        className="trip-action-btn trip-remove-btn"
+                        onClick={() => handleRemoveTrip(trip.id)}
                       >
-                        Start Trip
-                      </button>
-                      <button className="trip-action-btn trip-remove-btn">
                         Cancel Plan
                       </button>
                     </div>
@@ -290,7 +334,7 @@ export default function Profile() {
           )}
         </div>
 
-        <div className="expenditure-graph">
+        <div className="expenditure-graph flex-col">
           <h2>Expenditure Overview</h2>
           <Bar data={chartData} options={chartOptions} />
         </div>
