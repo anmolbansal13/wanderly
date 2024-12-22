@@ -82,13 +82,13 @@ const Bookings = ({
     <div className="bookings-container">
       <h1 className="bookings-title">Bookings</h1>
       <div className="booking-options">
-        {/* <div className="booking-card" onClick={handleSearchFlights}>
+        <div className="booking-card" onClick={handleSearchFlights}>
           <div className="booking-icon">{"✈️"}</div>
           <h2 className="booking-name">
             Flights starting ₹ {price ? price + "/-" : "....."}
           </h2>
         </div>
-        <div className="booking-card">
+        {/* <div className="booking-card">
           <div className="booking-icon">{"🏨"}</div>
           <h2 className="booking-name">{"Hotels"}</h2>
         </div>
@@ -101,9 +101,9 @@ const Bookings = ({
           disabled={isCitySelected}
           onClick={handleStartTrip}
         >
-          <div className="booking-icon">{"..."}</div>
+          <div className="booking-icon">{"👉"}</div>
           <h2 className="booking-name">
-            {isCitySelected ? "Start a Trip" : "Choose Destination"}
+            {isCitySelected ? "Start the Trip" : "Choose Destination"}
           </h2>
         </div>
       </div>

@@ -6,6 +6,8 @@
     font-family: Arial, sans-serif;
     background-color: white;
     min-width: 15%;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   
   /* Title Styling */
@@ -18,7 +20,10 @@
   
   /* Booking Options Grid */
   .booking-options {
+    height: 100%;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 12px;
@@ -33,6 +38,11 @@
     transition: box-shadow 0.3s ease;
     text-align: center;
     width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   
   .booking-card:hover {
@@ -54,9 +64,11 @@
   }
   @media (max-width: 900px) {
     .booking-options {
-      flex-direction: row; /*?*/
+    justify-content: center;
+    flex-direction: row; /*?*/
     }
     .booking-card{
       max-width: 30%;
+      aspect-ratio: unset;
     }
   }

@@ -219,8 +219,7 @@ export default function Profile() {
         <div className="profile-stats">
           {onTrip && (
             <div className="stat-box" onClick={() => navigate(`/`)}>
-              <h3>Current Trip</h3>
-              <p>{}</p>
+              <p>Go to current Trip</p>
             </div>
           )}
           <div className="stat-box">

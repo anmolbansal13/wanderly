@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LoginPopup from "../LoginPopup/LoginPopup";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
@@ -8,13 +8,13 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null); // Ref for dropdown
 
   const goToHome = () => {
     navigate("/");
   };
 
   const handleLogout = async () => {
-    // console.log("Logout clicked");
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`${url}/logout`, {
@@ -37,9 +37,21 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="navbar">
-      {/* <i className="fa-solid fa-bars hamicon"></i> */}
       <h1 className="websiteName" onClick={goToHome}>
         Wanderly
       </h1>
@@ -47,13 +59,17 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
       {isLoggedIn ? (
         <div
           className="profile-container"
+          ref={dropdownRef} // Attach ref to container
           onClick={() => setShowDropdown(!showDropdown)}
         >
           <i className="fa-solid fa-user usericon"></i>
           {showDropdown && (
             <div className="dropdown-menu">
-              <div className="dropdown-item" style={{ "--item-index": 0 }}
-              onClick={() => navigate("/profile")}>
+              <div
+                className="dropdown-item"
+                style={{ "--item-index": 0 }}
+                onClick={() => navigate("/profile")}
+              >
                 Profile
               </div>
               <div

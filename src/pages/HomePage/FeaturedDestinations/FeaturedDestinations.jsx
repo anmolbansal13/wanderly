@@ -24,7 +24,7 @@ const destinations = [
   {
     id: 3,
     name: "Delhi, India",
-    image: "https://exploreio.in/wp-content/uploads/2024/01/202664.jpg",
+    image: "https://cdn.britannica.com/37/189837-050-F0AF383E/New-Delhi-India-War-Memorial-arch-Sir.jpg",
     rating: 3.8,
     description:
       "Delhi is a symbol of its rich cultural past and thriving present, a city most cherished and visited by all.",

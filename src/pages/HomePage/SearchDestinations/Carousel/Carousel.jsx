@@ -65,7 +65,7 @@ export default function Carousel({ selectedCity }) {
   return (
     <div className="carousel">
       <h2 className="searchedCityName">{cityInfo.name}</h2>
-      <p className="searchedCityDescription">{cityInfo.description}</p>
+      {/* <p className="searchedCityDescription">{cityInfo.description}</p> */}
       <p className="searchedCityAddress">{cityInfo.address}</p>
 
       <div className="carousel-wrapper">
