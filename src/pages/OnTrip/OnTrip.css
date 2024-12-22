@@ -17,7 +17,7 @@
 }
 .weatherSection {
   /* background-color: bisque; */
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   grid-area: c;
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
@@ -30,7 +30,12 @@
   grid-area: e;
 }
 .endTripButton {
-  background-color: rgb(0, 255, 183);
+  color: white;
+  background-color : #373737;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  margin: 5px;
+  font-weight: bold;
   grid-area: f;
 }
 
@@ -41,10 +46,10 @@
   grid-template-areas:
     "a a b b b d"
     "a a b b b d"
-    "a a b b b d"
-    "a a c c c d"
+    "a a b b b c"
+    "a a b b b c"
     "e e e e e f";
-  grid-template-rows: 4fr 4fr 4fr 2fr 1fr;
+  grid-template-rows: 4fr 4fr 4fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
@@ -52,7 +57,16 @@
 @media (max-width: 768px) {
   .gridContainer {
     height: auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      "a a a a a a"
+      "b b b b b b"
+      "c c c c d d"
+      "e e e e e e"
+      "f f f f f f";
+    grid-template-rows: 1fr 1fr 1fr 0.25fr 0.25fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
   }
 }

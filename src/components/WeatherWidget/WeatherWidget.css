@@ -1,16 +1,30 @@
 .weatherWidget {
-  padding: 20px;
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 1.4rem;
-  padding-right: 0.5rem;
-  color: white;
-  font-weight: 100 !important;
-  transition: background 0.3s ease; /* Smooth transition between weather states */
+  padding: 10px;
+  color: black;
+  font-weight: 100;
+  transition: background 0.3s ease;
+}
+
+.weatherHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.location-name {
+  font-size: 2.25rem;
+}
+
+.location-region {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 .condition-section {
@@ -19,6 +33,7 @@
   justify-content: center;
   align-items: center;
   font-size: 9rem;
+  height: 50%;
 }
 
 .temperature-section {
@@ -28,6 +43,14 @@
   align-items: center;
   font-size: 0.8rem;
   padding-bottom: 1rem;
+}
+
+.current-temp {
+  font-size: 3rem;
+}
+
+.feels-like {
+  font-size: 1.125rem;
 }
 
 .weather-details {
@@ -51,4 +74,10 @@
 .label {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .weatherWidget {
+    flex-direction: column;
+  }
 }
