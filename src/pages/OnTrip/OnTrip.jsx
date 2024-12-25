@@ -27,6 +27,9 @@ const OnTrip = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
+        if (response.status === 429) {
+          alert("Too many requests, please try again later");
+        }
         if (response.ok) {
           console.log("Trip status updated successfully");
         } else {
@@ -48,6 +51,9 @@ const OnTrip = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
+        if (response.status === 429) {
+          alert("Too many requests, please try again later");
+        }
         if (response.ok) {
           const data = await response.json();
           setTripEnded(data.tripComplete);

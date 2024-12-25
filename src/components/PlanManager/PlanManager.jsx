@@ -10,7 +10,7 @@ const PlanManager = ({
   activities,
   setActivities,
   originalActivities,
-  setOriginalActivities
+  setOriginalActivities,
 }) => {
   const [cityName, setCityName] = useState();
   const [isEditing, setIsEditing] = useState(false);
@@ -22,6 +22,9 @@ const PlanManager = ({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      if (response.status === 429) {
+        alert("Too many requests, please try again later");
+      }
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -49,6 +52,9 @@ const PlanManager = ({
           completedActivities: completedActivities,
         }),
       });
+      if (response.status === 429) {
+        alert("Too many requests, please try again later");
+      }
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -88,6 +94,9 @@ const PlanManager = ({
           },
         }
       );
+      if (response.status === 429) {
+        alert("Too many requests, please try again later");
+      }
       if (!response.ok)
         throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
@@ -163,7 +172,7 @@ const PlanManager = ({
                 <button
                   className="removeButton"
                   onClick={() => removeActivity(activity._id)}
-                  key={activity._id+"remove"}
+                  key={activity._id + "remove"}
                 >
                   Remove
                 </button>
@@ -172,7 +181,7 @@ const PlanManager = ({
                   onClick={() => {
                     handleActivityDone(activity._id);
                   }}
-                  key={activity._id+"done"}
+                  key={activity._id + "done"}
                 >
                   Mark as Done
                 </button>

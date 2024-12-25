@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./LoginPopup.css";
 
-const url =import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_BACKEND_URL;
 
 const LoginPopup = ({
   isLoggedIn,
@@ -43,6 +43,9 @@ const LoginPopup = ({
         },
         body: JSON.stringify(formData),
       });
+      if (response.status === 429) {
+        alert("Too many requests, please try again later");
+      }
       const data = await response.json();
       if (response.status === 409) {
         throw new Error(data.message);
