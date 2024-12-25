@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 3px;
   color: black;
   font-weight: 100;
   transition: background 0.3s ease;
@@ -19,22 +19,24 @@
 }
 
 .location-name {
-  font-size: 2.25rem;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
 .location-region {
   font-size: 0.875rem;
   margin-top: 0.25rem;
+  font-weight: 700;
 }
 
-.condition-section {
+/* .condition-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 9rem;
   height: 50%;
-}
+} */
 
 .temperature-section {
   display: flex;
@@ -44,9 +46,15 @@
   font-size: 0.8rem;
   padding-bottom: 1rem;
 }
-
+.temp-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
 .current-temp {
-  font-size: 3rem;
+  font-size: 2.8rem;
 }
 
 .feels-like {

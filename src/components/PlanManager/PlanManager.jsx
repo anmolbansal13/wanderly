@@ -9,9 +9,10 @@ const PlanManager = ({
   setCompletedActivities,
   activities,
   setActivities,
+  originalActivities,
+  setOriginalActivities
 }) => {
   const [cityName, setCityName] = useState();
-  const [originalActivities, setOriginalActivities] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
   const fetchTripDetails = async () => {
@@ -158,10 +159,11 @@ const PlanManager = ({
             )}
             <span>{activity.name}</span>
             {isEditing && (
-              <div className="activity-ontrip-buttons">
+              <div className="activity-ontrip-buttons" key={activity._id}>
                 <button
                   className="removeButton"
                   onClick={() => removeActivity(activity._id)}
+                  key={activity._id+"remove"}
                 >
                   Remove
                 </button>
@@ -170,6 +172,7 @@ const PlanManager = ({
                   onClick={() => {
                     handleActivityDone(activity._id);
                   }}
+                  key={activity._id+"done"}
                 >
                   Mark as Done
                 </button>
@@ -184,7 +187,7 @@ const PlanManager = ({
           <div className="popup-container">
             <div className="attractions-grid">
               {availableAttractions.map((attraction) => (
-                <div key={attraction._id} className="attraction-item">
+                <div key={attraction.id} className="attraction-item">
                   <span>{attraction.name}</span>
                   <button
                     className={`add-remove-btn ${

@@ -12,6 +12,7 @@ const OnTrip = () => {
   const { tripId } = useParams();
   const navigate = useNavigate();
   const [completedActivities, setCompletedActivities] = useState([]);
+  const [originalActivities, setOriginalActivities] = useState([]);
   const [activities, setActivities] = useState([]);
   const [tripEnded, setTripEnded] = useState(false);
 
@@ -75,11 +76,13 @@ const OnTrip = () => {
                 setCompletedActivities={setCompletedActivities}
                 activities={activities}
                 setActivities={setActivities}
+                originalActivities={originalActivities}
+                setOriginalActivities={setOriginalActivities}
               />
             </div>
 
             <div className="mapSection">
-              <Map activities={activities} />
+              <Map activities={originalActivities} />
             </div>
 
             <div className="weatherSection">

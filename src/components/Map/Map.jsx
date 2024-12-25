@@ -142,7 +142,7 @@ const Map = ({ activities }) => {
         existingScript.remove();
       }
     };
-  }, [geocodedLocations, polylineData]);
+  }, [polylineData]);
 
   return (
     <div className="mapContainer">

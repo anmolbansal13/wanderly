@@ -51,7 +51,7 @@ const WeatherWidget = ({ tripId }) => {
           },
         });
         const data = await response.json();
-        console.log("Weather data received:", data);
+        // console.log("Weather data received:", data);
         setWeatherData(data);
         setLoading(false);
       } catch (err) {
@@ -78,14 +78,14 @@ const WeatherWidget = ({ tripId }) => {
             </p>
           </div>
 
-          <div className="condition-section">
+          {/* <div className="condition-section">
             <img
               src={weatherData.current.condition.icon.replace("//", "https://")}
               alt={weatherData.current.condition.text}
             />
-          </div>
+          </div> */}
           <div className="temperature-section">
-            <div className="temperature-section">
+            <div className="temp-section">
               <h1 className="current-temp">{weatherData.current.temp_c}°C</h1>
               <p className="feels-like">
                 Feels like: {weatherData.current.feelslike_c}°C
