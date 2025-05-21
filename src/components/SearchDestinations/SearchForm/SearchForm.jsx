@@ -37,9 +37,6 @@ export default function SearchForm({
           const response = await fetch(
             `${url}/autocompleteSearch?input=${encodeURIComponent(searchInput)}`
           );
-          if (response.status === 429) {
-            alert("Too many requests, please try again later");
-          }
           const data = await response.json();
 
           if (response.ok) {
@@ -70,9 +67,6 @@ export default function SearchForm({
               searchInput0
             )}`
           );
-          if (response.status === 429) {
-            alert("Too many requests, please try again later");
-          }
           const data = await response.json();
 
           if (response.ok) {

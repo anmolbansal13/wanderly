@@ -1,6 +1,6 @@
 import React from "react";
-import SearchDestinations from "./SearchDestinations/SearchDestinations.jsx";
-import FeaturedDestinations from "./FeaturedDestinations/FeaturedDestinations";
+import SearchDestinations from "../../components/SearchDestinations/SearchDestinations.jsx";
+import FeaturedDestinations from "../../components/FeaturedDestinations/FeaturedDestinations";
 import "./Homepage.css";
 
 export default function Homepage({ isLoggedIn, setLoginPopup }) {
