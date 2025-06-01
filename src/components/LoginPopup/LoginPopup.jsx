@@ -130,7 +130,7 @@ const LoginPopup = ({
             : "Already have an account? Login"}
         </button>
         <button className="close-btn" onClick={onClose}>
-          Close
+            &times;
         </button>
       </div>
     </div>

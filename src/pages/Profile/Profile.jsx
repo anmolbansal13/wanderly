@@ -222,11 +222,23 @@ export default function Profile() {
               <p>Go to current Trip</p>
             </div>
           )}
-          <div className="stat-box">
+          <div
+            className="stat-box"
+            onClick={() => {
+              setShowSavedTrips(!showSavedTrips);
+              setShowCompletedTrips(false);
+            }}
+          >
             <h3>Saved Trips</h3>
             <p>{trips.saved.length}</p>
           </div>
-          <div className="stat-box">
+          <div
+            className="stat-box"
+            onClick={() => {
+              setShowCompletedTrips(!showCompletedTrips);
+              setShowSavedTrips(false);
+            }}
+          >
             <h3>Completed Trips</h3>
             <p>{trips.completed.length}</p>
           </div>

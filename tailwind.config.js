@@ -54,7 +54,33 @@ export default {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))'
         }
-      }
+      },
+      animation: {
+        'fade-slide-down': 'fadeSlideDown 0.8s ease-out',
+        'fade-slide-down-delay-200': 'fadeSlideDown 1s ease-out 0.2s both',
+        'fade-slide-down-delay-600': 'fadeSlideDown 1.4s ease-out 0.6s both',
+        'typewriter': 'typing 3.5s steps(40, end) 1.5s forwards, blink-caret 0.75s step-end infinite 1.5s',
+      },
+      keyframes: {
+        fadeSlideDown: {
+          'from': {
+            opacity: '0',
+            transform: 'translateY(-20px)',
+          },
+          'to': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
+        typing: {
+          'from': { width: '0' },
+          'to': { width: '100%' },
+        },
+        'blink-caret': {
+          'from, to': { 'border-color': 'transparent' },
+          '50%': { 'border-color': 'white' },
+        },
+      },
     },
   },
   plugins: [],

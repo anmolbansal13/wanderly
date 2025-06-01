@@ -1,28 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import "./SearchForm.css";
 
 const url = import.meta.env.VITE_BACKEND_URL;
+
 export default function SearchForm({
   onCitySelect,
   setCityName,
-  setFromCity,
   selectedDate,
   setSelectedDate,
 }) {
   const [searchInput, setSearchInput] = useState("");
-  const [searchInput0, setSearchInput0] = useState("");
   const [searchOutput, setSearchOutput] = useState("");
-  const [searchOutput0, setSearchOutput0] = useState("");
   const [predictions, setPredictions] = useState([]);
-  const [predictions0, setPredictions0] = useState([]);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
-        setActiveDropdown(null);
+        setShowDropdown(false);
       }
     };
 
@@ -51,73 +47,30 @@ export default function SearchForm({
       }
     };
 
-    const timeoutId = setTimeout(() => {
-      fetchPredictions();
-    }, 300);
-
+    const timeoutId = setTimeout(fetchPredictions, 300);
     return () => clearTimeout(timeoutId);
   }, [searchInput, searchOutput]);
-
-  useEffect(() => {
-    const fetchPredictions = async () => {
-      if (searchInput0 && searchInput0 !== searchOutput0) {
-        try {
-          const response = await fetch(
-            `${url}/autocompleteSearch?input=${encodeURIComponent(
-              searchInput0
-            )}`
-          );
-          const data = await response.json();
-
-          if (response.ok) {
-            setPredictions0(data.predictions);
-          }
-        } catch (error) {
-          console.error("Error fetching predictions:", error);
-          setPredictions0([]);
-        }
-      } else {
-        setPredictions0([]);
-      }
-    };
-    const timeoutId = setTimeout(() => {
-      fetchPredictions();
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
-  }, [searchInput0, searchOutput0]);
 
   const handlePredictionSelection = (prediction) => {
     setSearchOutput(prediction.description);
     setSearchInput(prediction.description);
     setCityName(prediction.description);
     onCitySelect(prediction.place_id);
+    setShowDropdown(false);
   };
-  const handlePredictionSelection0 = (prediction) => {
-    setSearchOutput0(prediction.description);
-    setSearchInput0(prediction.description);
-    setFromCity(prediction.description);
+
+  const handleSearch = () => {
+    if (predictions.length > 0) {
+      handlePredictionSelection(predictions[0]);
+    }
   };
+
   return (
     <form
-      className="search-form"
+      className="flex items-center justify-start p-2 gap-2.5 flex-wrap relative z-[99] md:grid md:grid-cols-6 md:gap-2"
       onSubmit={(e) => e.preventDefault()}
       ref={formRef}
     >
-      <h4 id="from">From</h4>
-      <input
-        type="text"
-        name="searchbar0"
-        id="currentCity"
-        placeholder="Current Location"
-        value={searchInput0}
-        onChange={(e) => {
-          setSearchInput0(e.target.value);
-          setActiveDropdown("from");
-        }}
-        onFocus={() => setActiveDropdown("from")}
-      />
-      <h4 id="to">To</h4>
       <input
         type="text"
         name="searchbar"
@@ -126,15 +79,17 @@ export default function SearchForm({
         value={searchInput}
         onChange={(e) => {
           setSearchInput(e.target.value);
-          setActiveDropdown("to");
+          setShowDropdown(true);
         }}
-        onFocus={() => setActiveDropdown("to")}
+        onFocus={() => setShowDropdown(true)}
+        className="flex-1 px-4 py-2 mt-auto border border-gray-600 rounded-full bg-white text-xs font-semibold text-center text-black placeholder-gray-400 transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-5"
       />
+
       {predictions.length > 0 &&
-        activeDropdown === "to" &&
+        showDropdown &&
         createPortal(
           <ul
-            className="predictions-list"
+            className="absolute bg-white border border-gray-600 rounded shadow-lg max-h-48 overflow-y-auto z-[999] mt-1 p-0 list-none w-full max-w-sm"
             style={{
               top:
                 document
@@ -143,7 +98,7 @@ export default function SearchForm({
               left:
                 document
                   .getElementById("destinationCity")
-                  ?.getBoundingClientRect().left + "px",
+                  ?.getBoundingClientRect().left +100 + "px",
             }}
           >
             {predictions.map((prediction) => (
@@ -152,8 +107,8 @@ export default function SearchForm({
                 onMouseDown={(e) => {
                   e.preventDefault();
                   handlePredictionSelection(prediction);
-                  setActiveDropdown(null);
                 }}
+                className="py-1.5 px-2.5 cursor-pointer transition-colors duration-200 hover:bg-white text-black truncate"
               >
                 {prediction.description}
               </li>
@@ -161,48 +116,11 @@ export default function SearchForm({
           </ul>,
           document.body
         )}
-      {predictions0.length > 0 &&
-        activeDropdown === "from" &&
-        createPortal(
-          <ul
-            className="predictions-list"
-            style={{
-              top:
-                document.getElementById("currentCity")?.getBoundingClientRect()
-                  .bottom + "px",
-              left:
-                document.getElementById("currentCity")?.getBoundingClientRect()
-                  .left + "px",
-            }}
-          >
-            {predictions0.map((prediction) => (
-              <li
-                key={prediction.place_id}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  handlePredictionSelection0(prediction);
-                  setActiveDropdown(null);
-                }}
-              >
-                {prediction.description}
-              </li>
-            ))}
-          </ul>,
-          document.body
-        )}
-      <input
-        type="date"
-        value={selectedDate}
-        onChange={(e) => setSelectedDate(e.target.value)}
-        min={new Date().toISOString().split("T")[0]}
-        id="date"
-      />
+
       <button
         type="submit"
-        className="searchBtn"
-        onClick={() =>
-          predictions.length > 0 && handlePredictionSelection(predictions[0])
-        }
+        className="px-4 py-2 mt-auto border border-gray-600 rounded-full bg-white text-xs font-semibold text-center text-black transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105 hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-1"
+        onClick={handleSearch}
       >
         Search
       </button>

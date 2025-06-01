@@ -1,4 +1,5 @@
 .navbar {
+  box-sizing: border-box;
   background-color: black;
   height: 10vh; /* affects onTrip section ig */
   color: #ffeac5;
@@ -6,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .hamicon {

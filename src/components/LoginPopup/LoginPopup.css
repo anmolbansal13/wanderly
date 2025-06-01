@@ -23,7 +23,7 @@
   text-align: center;
   color: black;
   transform: translateY(0);
-  animation: popIn 0.5s ease-out;
+  /* animation: popIn 0.5s ease-out; */
 }
 
 @keyframes popIn {
@@ -79,11 +79,18 @@ button {
 }
 
 button.close-btn {
-  background: linear-gradient(to right, #f44336, #ff5252);
-  color: white;
-  margin-top: 20px;
+  /* background: linear-gradient(to right, #f44336, #ff5252); */
+  /* margin-top: 20px; */
+  color: black;
+  position: absolute;
+  top: -15px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0px;
 }
-
 button.switch-btn {
   background: linear-gradient(to right, #007bff, #00b0ff);
   color: white;
@@ -100,6 +107,10 @@ button:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+button.close-btn:hover{
+  box-shadow: none;
+  transform: scale(1.2);
+}
 button:active {
   transform: scale(0.98);
 }

@@ -1,0 +1,20 @@
+.custom-carousel-container {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+.custom-carousel-container .carousel {
+  height: auto !important;
+}
+
+.custom-carousel-container .carousel .slider-wrapper {
+  height: auto !important;
+}
+
+.custom-carousel-container .carousel .slider {
+  height: auto !important;
+}
+
+.custom-carousel-container .carousel .slide {
+  height: auto !important;
+}

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Bookings.css";
+
 const url = import.meta.env.VITE_BACKEND_URL;
 
 const Bookings = ({
@@ -13,24 +12,16 @@ const Bookings = ({
 }) => {
   const navigate = useNavigate();
   const [price, setPrice] = useState(null);
-
   const [isCitySelected, setIsCitySelected] = useState(false);
 
   useEffect(() => {
-    if (cityName) {
-      setIsCitySelected(true);
-    }
-    if (cityName === null) {
-      setIsCitySelected(false);
-    }
+    setIsCitySelected(!!cityName);
   }, [cityName]);
 
   const [lastSearch, setLastSearch] = useState({ cityName: "", fromCity: "" });
 
   const handleStartTrip = async () => {
     if (isCitySelected && isLoggedIn) {
-      console.log(cityName);
-      console.log(`/offtrip/${encodeURIComponent(cityName)}`);
       await navigate(`/offtrip/${encodeURIComponent(cityName)}`);
     }
     if (isCitySelected && !isLoggedIn) {
@@ -38,74 +29,19 @@ const Bookings = ({
     }
   };
 
-  const searchFlights = async ({ cityName, fromCity }) => {
-    try {
-      //console.log(arrivalQuery, departureQuery);
-      const response = await fetch(`${url}/lowest-flight-price`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          arrivalQuery: cityName,
-          departureQuery: fromCity,
-          date: selectedDate,
-        }),
-      });
-
-      const data = await response.json();
-      return data; // This will return the price from best_flights[0]
-    } catch (error) {
-      console.error("Error fetching flights:", error);
-      throw error;
-    }
-  };
-
-  const handleSearchFlights = async () => {
-    if (
-      cityName &&
-      fromCity &&
-      cityName !== fromCity &&
-      (cityName !== lastSearch.cityName || fromCity !== lastSearch.fromCity)
-    ) {
-      try {
-        const flightPrice = await searchFlights({ cityName, fromCity });
-        setPrice(flightPrice);
-        setLastSearch({ cityName, fromCity });
-      } catch (error) {
-        console.error("Failed to fetch flight prices:", error);
-      }
-    }
-  };
-
   return (
-    <div className="bookings-container">
-      <h1 className="bookings-title">Bookings</h1>
-      <div className="booking-options">
-        <div className="booking-card" onClick={handleSearchFlights}>
-          <div className="booking-icon">{"✈️"}</div>
-          <h2 className="booking-name">
-            Flights starting ₹ {price ? price + "/-" : "....."}
+    <div className="pl-2 text-center font-sans text-white min-w-[15%] my-auto">
+      <div className="h-full flex items-center justify-evenly flex-col flex-wrap gap-3 mt-2.5 md:justify-center md:flex-row">
+        {/* <div
+          className="rounded-lg p-2.5 transition-shadow duration-300 ease-in-out text-center w-full aspect-square flex justify-center items-center flex-col hover:shadow-lg hover:shadow-white/10 hover:cursor-pointer md:max-w-[30%] md:aspect-auto"
+          > */}
+          <h2 className="text-2xl text-gray-300 hover:shadow-lg hover:shadow-white/10 hover:cursor-pointer"
+            disabled={isCitySelected}
+            onClick={handleStartTrip}
+          >
+            {isCitySelected ? "Start Trip" : "Choose Destination"}
           </h2>
-        </div>
-        {/* <div className="booking-card">
-          <div className="booking-icon">{"🏨"}</div>
-          <h2 className="booking-name">{"Hotels"}</h2>
-        </div>
-        <div className="booking-card">
-          <div className="booking-icon">{"🚍"}</div>
-          <h2 className="booking-name">{"Bus/Cabs"}</h2>
-        </div> */}
-        <div
-          className="booking-card"
-          disabled={isCitySelected}
-          onClick={handleStartTrip}
-        >
-          <div className="booking-icon">{"👉"}</div>
-          <h2 className="booking-name">
-            {isCitySelected ? "Start the Trip" : "Choose Destination"}
-          </h2>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

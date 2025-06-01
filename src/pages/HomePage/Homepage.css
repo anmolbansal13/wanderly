@@ -1,15 +1,40 @@
-.main-body{
-    display: flex;
-    /* position: relative; */
-    height: 100%;
-    width: 100%;
-    /* padding: 3px; */
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
+.main-body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden; */
+  background-color: black;
 }
+
+.search-section {
+  flex: 3;
+  box-sizing: border-box;
+  /* padding: 10px; */
+}
+
+.featured-section {
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: 768px) {
-    .main-body{
-        flex-direction: column;
-    }
+  .main-body {
+    flex-direction: column;
+    height: auto; /* Allow height to expand for stacked layout */
   }
+
+  .search-section,
+  .featured-section {
+    width: 100%;
+    flex: unset;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .featured-section {
+    /* display: block; Ensure it renders as a visible block */
+    display: flex;
+    justify-content: center;
+  }
+}
